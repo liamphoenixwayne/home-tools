@@ -1,0 +1,823 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>黑天鹅 · 讲课稿</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --bg:      #f2f0f5;
+    --bg2:     #e8e4ef;
+    --card:    #ffffff;
+    --ink:     #1a1520;
+    --ink2:    #433d4e;
+    --ink3:    #7a7288;
+    --accent:  #4a2d7a;
+    --accent2: #8b5cf6;
+    --line:    #cfc8dc;
+    --green:   #2e7d52;
+    --red:     #a93226;
+    --amber:   #b45309;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.8;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: #1a1520;
+    padding: 80px 40px;
+    margin-bottom: 64px;
+  }
+  .cover-inner { max-width: 900px; margin: 0 auto; }
+  .cover-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #4a3f5c;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .cover-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 700;
+    color: #ede8f5;
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+  .cover-series {
+    display: inline-flex;
+    gap: 8px;
+    margin-bottom: 16px;
+  }
+  .series-tag {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    font-size: 0.72rem;
+    padding: 3px 10px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+  }
+  .series-tag.prev { background: #2c5282; }
+  .series-tag.next { background: var(--green); }
+  .cover-sub {
+    font-size: 1rem;
+    color: #4a3f5c;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    font-size: 0.82rem;
+    color: #332a40;
+    border-top: 1px solid #261d33;
+    padding-top: 18px;
+  }
+
+  /* ── PAGE ── */
+  .page { max-width: 900px; margin: 0 auto; padding: 0 40px 100px; }
+
+  .reading-time {
+    display: inline-block;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    padding: 6px 16px;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    color: var(--ink3);
+    margin-bottom: 48px;
+  }
+
+  /* ── TOC ── */
+  .toc {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 28px 32px;
+    margin-bottom: 48px;
+    border-left: 3px solid var(--accent);
+  }
+  .toc h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.9rem;
+    margin-bottom: 16px;
+    color: var(--ink3);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px 24px; }
+  .toc-item { font-size: 0.84rem; color: var(--ink2); display: flex; gap: 10px; }
+  .toc-num { font-family: 'EB Garamond', serif; color: var(--accent); flex-shrink: 0; width: 20px; }
+
+  /* ── SECTION ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin: 72px 0 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-num { font-family: 'EB Garamond', serif; font-size: 3rem; color: var(--line); line-height: 1; flex-shrink: 0; }
+  .section-label { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; font-family: 'EB Garamond', serif; font-style: italic; }
+  .section-title { font-family: 'Noto Serif SC', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--ink); line-height: 1.2; }
+
+  /* ── BLOCKS ── */
+  .block { background: var(--card); border-radius: 4px; padding: 32px 36px; margin-bottom: 20px; }
+  .block-label { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 12px; }
+  .block h3 { font-family: 'Noto Serif SC', serif; font-size: 1.15rem; font-weight: 600; margin-bottom: 14px; color: var(--ink); }
+  .block p { font-size: 0.95rem; color: var(--ink2); font-weight: 300; line-height: 1.85; }
+  .block p + p { margin-top: 12px; }
+
+  /* ── QUOTE ── */
+  .quote { border-left: 3px solid var(--accent); background: var(--bg2); padding: 18px 24px; border-radius: 0 4px 4px 0; margin-bottom: 20px; }
+  .quote p { font-family: 'Noto Serif SC', serif; font-size: 0.98rem; font-style: italic; color: var(--ink); font-weight: 400; line-height: 1.8; }
+  .quote cite { display: block; margin-top: 8px; font-size: 0.78rem; color: var(--ink3); font-style: normal; font-family: 'Noto Sans SC', sans-serif; }
+
+  /* ── FORMULA ── */
+  .formula { background: #1a1520; border-radius: 4px; padding: 28px 36px; margin-bottom: 20px; text-align: center; }
+  .formula p { font-family: 'EB Garamond', serif; font-size: clamp(1.1rem, 2.2vw, 1.6rem); color: #ede8f5; line-height: 1.7; }
+  .formula em { color: var(--accent2); font-style: normal; }
+
+  /* ── THREE CARDS ── */
+  .tricard { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .tc { background: var(--card); border-radius: 4px; padding: 24px 20px; border-top: 3px solid var(--line); }
+  .tc.bs-def { border-top-color: var(--accent); }
+  .tc.bs-pos { border-top-color: var(--green); }
+  .tc.bs-neg { border-top-color: var(--red); }
+  .tc-icon { font-size: 2rem; margin-bottom: 12px; }
+  .tc-name { font-family: 'Noto Serif SC', serif; font-size: 1rem; font-weight: 700; margin-bottom: 4px; }
+  .tc-myth { font-size: 0.78rem; color: var(--ink3); font-style: italic; margin-bottom: 10px; }
+  .tc-desc { font-size: 0.86rem; color: var(--ink2); font-weight: 300; line-height: 1.7; }
+
+  /* ── TWO COL ── */
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .col-block { background: var(--card); border-radius: 4px; padding: 24px 22px; }
+  .col-block.bad     { border-top: 3px solid var(--red); }
+  .col-block.good    { border-top: 3px solid var(--green); }
+  .col-block.neutral { border-top: 3px solid var(--accent2); }
+  .col-block h3 { font-family: 'Noto Serif SC', serif; font-size: 0.95rem; margin-bottom: 14px; }
+
+  /* ── LIST ── */
+  .li { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .li-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-top: 9px; flex-shrink: 0; }
+  .li p { font-size: 0.88rem; color: var(--ink2); font-weight: 300; line-height: 1.7; }
+
+  /* ── BIAS CARDS ── */
+  .bias-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
+  .bias-card { background: var(--card); border-radius: 4px; padding: 20px 22px; border-left: 3px solid var(--accent2); }
+  .bias-card h3 { font-family: 'Noto Serif SC', serif; font-size: 0.92rem; font-weight: 600; margin-bottom: 6px; color: var(--ink); }
+  .bias-card p { font-size: 0.84rem; color: var(--ink3); font-weight: 300; line-height: 1.65; }
+
+  /* ── COMPARE TABLE ── */
+  .compare { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88rem; }
+  .compare th { background: #1a1520; color: #ede8f5; padding: 12px 16px; text-align: left; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 0.85rem; }
+  .compare td { padding: 11px 16px; border-bottom: 1px solid var(--line); color: var(--ink2); font-weight: 300; vertical-align: top; }
+  .compare tr:nth-child(even) td { background: var(--bg2); }
+  .compare td:first-child { font-weight: 400; color: var(--ink); }
+
+  /* ── EXAMPLE ── */
+  .example { background: var(--bg2); border-radius: 4px; padding: 20px 24px; margin: 14px 0; border-left: 2px solid var(--accent2); }
+  .example-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent2); margin-bottom: 6px; font-family: 'EB Garamond', serif; font-style: italic; }
+  .example p { font-size: 0.88rem; color: var(--ink2); font-weight: 300; line-height: 1.75; }
+
+  /* ── CONCEPT GRID ── */
+  .concept-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; margin-bottom: 20px; }
+  .concept-card { background: var(--card); border-radius: 4px; padding: 22px 24px; border-left: 3px solid var(--accent2); }
+  .concept-card h3 { font-family: 'Noto Serif SC', serif; font-size: 0.95rem; font-weight: 600; margin-bottom: 8px; color: var(--ink); }
+  .concept-card p { font-size: 0.85rem; color: var(--ink3); font-weight: 300; line-height: 1.7; }
+
+  /* ── SUMMARY GRID ── */
+  .sum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .sg { background: var(--card); border-radius: 4px; padding: 18px 20px; display: flex; gap: 14px; }
+  .sg-n { font-family: 'EB Garamond', serif; font-size: 1.4rem; color: var(--accent); line-height: 1; flex-shrink: 0; width: 24px; }
+  .sg-t h3 { font-size: 0.88rem; margin-bottom: 4px; font-family: 'Noto Serif SC', serif; }
+  .sg-t p  { font-size: 0.82rem; color: var(--ink3); font-weight: 300; line-height: 1.65; }
+
+  /* ── TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { background: var(--bg2); border: 1px solid var(--line); border-radius: 2px; padding: 5px 12px; font-size: 0.8rem; color: var(--ink2); }
+  .tag.hl { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* ── SERIES BAR ── */
+  .series-bar {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 20px 28px;
+    margin-bottom: 20px;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    border-top: 3px solid var(--accent);
+  }
+  .series-item { text-align: center; }
+  .series-item-num { font-family: 'EB Garamond', serif; font-size: 0.75rem; color: var(--ink3); margin-bottom: 4px; }
+  .series-item-title { font-family: 'Noto Serif SC', serif; font-size: 0.9rem; font-weight: 600; color: var(--ink); margin-bottom: 4px; }
+  .series-item-desc { font-size: 0.78rem; color: var(--ink3); font-weight: 300; }
+  .series-item.current .series-item-title { color: var(--accent); }
+  .series-item.current .series-item-num { color: var(--accent); }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+
+  footer { text-align: center; padding: 32px 0 0; font-size: 0.75rem; color: var(--ink3); border-top: 1px solid var(--line); margin-top: 64px; }
+
+  @media (max-width: 640px) {
+    .page { padding: 0 20px 80px; }
+    .cover { padding: 60px 20px; }
+    .tricard, .twocol, .concept-grid, .sum-grid, .toc-grid, .bias-grid, .series-bar { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Nassim Nicholas Taleb · 2007 · 讲课稿</div>
+    <div class="cover-title">黑天鹅</div>
+    <div class="cover-series">
+      <span class="series-tag prev">Incerto 第二部</span>
+    </div>
+    <div class="cover-sub">极端、不可预测事件的巨大影响 · 重新整理的逻辑顺序</div>
+    <div class="cover-meta">约 60 分钟讲解 · 全部内容来自原书 · 按教学逻辑重新编排</div>
+  </div>
+</div>
+
+<div class="page">
+<div class="reading-time">📖 建议讲解时间：60 分钟 · 共 11 个部分</div>
+
+<!-- 三部曲定位 -->
+<div class="series-bar">
+  <div class="series-item">
+    <div class="series-item-num">第一部</div>
+    <div class="series-item-title">随机骗局</div>
+    <div class="series-item-desc">我们如何被随机性欺骗；幸存者偏差与认知陷阱</div>
+  </div>
+  <div class="series-item current">
+    <div class="series-item-num">第二部 ← 本讲</div>
+    <div class="series-item-title">黑天鹅</div>
+    <div class="series-item-desc">极端事件为何不可预测；为什么专家总是错的</div>
+  </div>
+  <div class="series-item">
+    <div class="series-item-num">第三部</div>
+    <div class="series-item-title">反脆弱</div>
+    <div class="series-item-desc">既然不能预测，如何设计自己从波动中获益</div>
+  </div>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>目录</h3>
+  <div class="toc-grid">
+    <div class="toc-item"><span class="toc-num">01</span><span>黑天鹅的定义：三个特征</span></div>
+    <div class="toc-item"><span class="toc-num">02</span><span>为什么黑天鹅主宰历史</span></div>
+    <div class="toc-item"><span class="toc-num">03</span><span>平庸斯坦 vs 极端斯坦</span></div>
+    <div class="toc-item"><span class="toc-num">04</span><span>我们为什么看不见黑天鹅</span></div>
+    <div class="toc-item"><span class="toc-num">05</span><span>叙事谬误：故事让我们更盲目</span></div>
+    <div class="toc-item"><span class="toc-num">06</span><span>沉默证据：我们只看到幸存者</span></div>
+    <div class="toc-item"><span class="toc-num">07</span><span>预测的丑闻：专家为什么总是错的</span></div>
+    <div class="toc-item"><span class="toc-num">08</span><span>高斯钟形曲线的谎言</span></div>
+    <div class="toc-item"><span class="toc-num">09</span><span>鲁迪科学 vs 经验怀疑主义</span></div>
+    <div class="toc-item"><span class="toc-num">10</span><span>如何与黑天鹅共处</span></div>
+    <div class="toc-item"><span class="toc-num">11</span><span>总结</span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     01 定义
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">01</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心定义 · 序言</div>
+    <div class="section-title">黑天鹅的三个特征</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">起源：一个颠覆认知的物种发现</div>
+  <h3>一只黑天鹅，推翻了一千年的"常识"</h3>
+  <p>在1697年荷兰探险家威廉·德·弗拉明到达澳大利亚之前，欧洲人见过的每一只天鹅都是白色的。这个观察被重复了几百年、几千次，成了"不可置疑的常识"——天鹅都是白的。</p>
+  <p>然后他们看到了黑天鹅。一个单一的观察，推翻了几千年的"归纳证据"。</p>
+  <p>塔勒布用这个故事作为全书的隐喻：无论我们积累了多少关于"正常状态"的证据，都无法排除一个极端异常事件颠覆一切的可能性。</p>
+</div>
+
+<div class="tricard">
+  <div class="tc bs-neg">
+    <div class="tc-icon">🦢</div>
+    <div class="tc-name">极端罕见性</div>
+    <div class="tc-myth">特征一</div>
+    <div class="tc-desc">事件发生之前，根据已有的历史数据和经验，没有任何迹象表明它会发生。它是真正的"离群值"，在正常预期之外。</div>
+  </div>
+  <div class="tc bs-def">
+    <div class="tc-icon">💥</div>
+    <div class="tc-name">极端冲击力</div>
+    <div class="tc-myth">特征二</div>
+    <div class="tc-desc">一旦发生，后果极其深远，对经济、历史、科技、个人命运产生巨大的、不成比例的影响。小事件不是黑天鹅。</div>
+  </div>
+  <div class="tc bs-pos">
+    <div class="tc-icon">🔮</div>
+    <div class="tc-name">事后可解释性</div>
+    <div class="tc-myth">特征三</div>
+    <div class="tc-desc">事件发生之后，人们总能构造出一套听起来很合理的解释，说它"其实是可以预测的"——但这个解释只在事后存在。</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">黑天鹅的双向性</div>
+  <h3>黑天鹅有正向和负向两种</h3>
+  <p>负向黑天鹅：2001年9·11袭击、2008年金融危机、新冠疫情——没有人提前预测到，一旦发生，代价是灾难性的。</p>
+  <p>正向黑天鹅：互联网的诞生、谷歌的崛起、一本无名小说突然畅销全球——同样无法提前预测，一旦发生，收益是巨大的。</p>
+  <p>塔勒布的核心论点：<strong>少数几次黑天鹅事件，解释了历史上绝大部分的重大变化</strong>——无论是战争、技术革命、金融危机，还是个人命运的转折点。真正驱动历史的，不是那些我们能预测的、渐进的变化，而是这些极端的、不可预测的事件。</p>
+</div>
+
+<div class="example">
+  <div class="example-label">原书个人经历</div>
+  <p>塔勒布在黎巴嫩长大。黎巴嫩在历史上以各宗教、族裔和平共存著称，被称为"中东的瑞士"，这种稳定持续了几百年。然后在1975年，内战突然爆发，之前的"稳定"在一夜之间消失。塔勒布说，这个童年经历是他整个思想体系的起点——历史不是缓慢爬行的，它是跳跃式前进的，而且每次大跳跃都来自没有人预料到的地方。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     02 为何主宰历史
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">02</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心论点 · 第1章</div>
+    <div class="section-title">黑天鹅为什么主宰历史</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">不透明性的三元组</div>
+  <h3>三种认知陷阱让我们对黑天鹅视而不见</h3>
+  <p>塔勒布在第1章提出"不透明性的三元组"（Triplet of Opacity），解释为什么人类系统性地无法预测黑天鹅：</p>
+</div>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h3>一、理解的幻觉</h3>
+    <p>我们相信自己理解了世界的运作方式，能够解释正在发生的事情。实际上，我们对复杂系统的理解极为肤浅，大量的因果关系是我们看不到的。</p>
+  </div>
+  <div class="concept-card">
+    <h3>二、回顾性扭曲</h3>
+    <p>事件发生之后，我们会重构记忆和解释，使过去看起来比实际上更可预测、更有逻辑。我们忘记了当时的茫然，记住的是事后构造的"显而易见"。</p>
+  </div>
+  <div class="concept-card">
+    <h3>三、知识的过度重视</h3>
+    <p>我们过度信任学术知识和专家权威，认为拥有更多信息、更完善的理论，就能更好地预测未来。但有时候，信息越多，过度自信就越严重。</p>
+  </div>
+  <div class="concept-card">
+    <h3>历史向前运行的感受</h3>
+    <p>塔勒布引用记者威廉·夏伊勒的柏林日记：在纳粹德国崛起的现场，夏伊勒并不知道他正在见证历史——历史只在事后才显得"清晰"。我们永远是在向前走，看不到前方。</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">出租车司机 vs 专家</div>
+  <h3>信息不等于知识，有时候反而更有害</h3>
+  <p>塔勒布在黎巴嫩内战期间观察到一个现象：出租车司机对局势的判断往往比政治家和知识分子更准确。原因是：出租车司机每天和各种人打交道，积累的是真实的街头信息；而专家们被自己的理论框架所束缚，接收到的信息都在强化他们已有的偏见。</p>
+  <p>塔勒布把这个观察推广成一个普遍原则：<strong>信息量的增加，往往并不改善甚至会恶化我们对未来的判断</strong>，因为更多信息只是给了我们更多"证据"来支持我们想相信的东西。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     03 两个世界
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">03</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念 · 第3章</div>
+    <div class="section-title">平庸斯坦 vs 极端斯坦：两种完全不同的随机性</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">两种随机性，两种世界</div>
+  <h3>生活在平庸斯坦的规则，不适用于极端斯坦</h3>
+  <p>塔勒布创造了两个虚构的"地方"来说明两种根本不同的随机性，理解这个区分是理解整本书的基础。</p>
+</div>
+
+<table class="compare">
+  <tr>
+    <th>维度</th>
+    <th>平庸斯坦（Mediocristan）</th>
+    <th>极端斯坦（Extremistan）</th>
+  </tr>
+  <tr>
+    <td>典型例子</td>
+    <td>身高、体重、跑步速度、寿命</td>
+    <td>财富、书籍销量、社交媒体影响力、战争伤亡</td>
+  </tr>
+  <tr>
+    <td>极端值的影响</td>
+    <td>加入世界上最高的人，不会显著改变1000人样本的平均身高</td>
+    <td>加入埃隆·马斯克，会让1000人样本的平均财富飙升几十倍</td>
+  </tr>
+  <tr>
+    <td>物理约束</td>
+    <td>有上限（人不能高过4米）</td>
+    <td>无上限（财富、影响力理论上无限）</td>
+  </tr>
+  <tr>
+    <td>可扩展性</td>
+    <td>按摩师每天只能服务有限客户，收入有上限</td>
+    <td>一首歌录制一次，可以卖给全球几十亿人</td>
+  </tr>
+  <tr>
+    <td>适用分布</td>
+    <td>正态分布（钟形曲线）基本有效</td>
+    <td>幂律分布，正态分布完全失效</td>
+  </tr>
+  <tr>
+    <td>黑天鹅风险</td>
+    <td>极低</td>
+    <td>极高——单个极端事件可以主宰一切</td>
+  </tr>
+</table>
+
+<div class="block">
+  <div class="block-label">关键洞见</div>
+  <h3>我们生活在极端斯坦，却用平庸斯坦的工具做决策</h3>
+  <p>现代经济学、金融学、风险管理，大量使用基于正态分布的模型。这些模型在平庸斯坦里基本有效，但金融市场、经济系统、社会事件，都是极端斯坦的领域——单一极端事件（股市崩溃、战争、技术革命）可以主宰全局。</p>
+  <p>用平庸斯坦的工具管理极端斯坦的风险，是现代社会系统性低估黑天鹅的根本原因。2008年金融危机发生时，所有主流风险模型都认为这种级别的崩溃"概率极低，几乎不可能发生"。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">可扩展性与赢者通吃</div>
+  <h3>极端斯坦制造了极端的不平等</h3>
+  <p>塔勒布在第3章用一个朋友的建议讲解了可扩展性（Scalability）。朋友建议他追求"可扩展"的职业——不是按小时收费，而是可以通过一次创作获得大量回报的工作（作家、音乐家、交易员）。</p>
+  <p>但可扩展性是一把双刃剑：它创造了赢者通吃的极端不平等（头部的作家或歌手赚走了绝大部分收入，99%的人颗粒无收），同时也让整个领域充满了黑天鹅——因为任何人都有理论上的可能性突然爆红。</p>
+  <p>数字时代把越来越多的行业变成了极端斯坦——这意味着更多的黑天鹅，更大的不平等，更难用历史数据预测未来。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     04 认知偏差
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">04</div>
+  <div class="section-title-wrap">
+    <div class="section-label">认知心理学 · 第4-5章</div>
+    <div class="section-title">我们为什么看不见黑天鹅：四种认知偏差</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">火鸡问题——第4章</div>
+  <h3>一千天的经验，在第一千零一天彻底失效</h3>
+  <p>一只火鸡被人类喂养了一千天。每一天的经验都证明：人类是友善的，食物是充足的，生活是安全的。基于这一千天的"历史数据"，这只火鸡对未来充满信心。</p>
+  <p>然后感恩节前一天到来了。</p>
+  <p>塔勒布用这个比喻说明：归纳推理（从过去的观察推断未来）在极端斯坦里是危险的。你越是依赖历史数据，你就越是在为下一个黑天鹅积累盲区。你的信心随着样本数量的增加而增长，但你实际的脆弱性并没有减少。</p>
+</div>
+
+<div class="bias-grid">
+  <div class="bias-card">
+    <h3>确认偏差（第5章）</h3>
+    <p>我们倾向于寻找和注意支持我们既有信念的证据，忽略反驳证据。看到一千只白天鹅，强化了"天鹅都是白的"的信念，不会去想"也许还有其他颜色"。</p>
+  </div>
+  <div class="bias-card">
+    <h3>负向证据的忽视</h3>
+    <p>科学进步的逻辑是证伪（波普尔），但人类直觉是证实。我们寻找"这是真的"的证据，而不是"这是假的"的证据——但单一反例就能推翻整个理论。</p>
+  </div>
+  <div class="bias-card">
+    <h3>赌徒谬误的变体</h3>
+    <p>我们认为"已经很久没发生了"意味着"更不可能发生了"。实际上，一个罕见事件上次发生是多久前，和它下次发生的概率毫无关系。</p>
+  </div>
+  <div class="bias-card">
+    <h3>专家的空架子</h3>
+    <p>专家在外推历史趋势时表现尚可，在预测极端偏离时几乎没有任何优势。研究表明，经济学家的长期预测平均而言不比出租车司机更准确。</p>
+  </div>
+</div>
+
+<div class="quote">
+  <p>我们不自然地把世界拆解成清晰的类别，来简化理解它。柏拉图（的形式论）告诉我们，真实的世界是由清晰的"形式"构成的，而我们看到的现实只是这些形式的不完美副本。这个思维习惯——把混乱的现实强行归入整洁的类别——是我们对黑天鹅视而不见的根本原因之一。</p>
+  <cite>— 塔勒布，《黑天鹅》第9章（卢迪克谬误）</cite>
+</div>
+
+<!-- ══════════════════════════════════════
+     05 叙事谬误
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">05</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念 · 第6章</div>
+    <div class="section-title">叙事谬误：故事让我们更盲目</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">叙事谬误（Narrative Fallacy）</div>
+  <h3>我们无法接受"事情就是随机发生的"</h3>
+  <p>人类的大脑无法忍受没有因果关系的事件。当一件事发生了，我们会立刻构造一个故事来解释它，把随机的、偶然的事件串联成一个有逻辑、有因果、有意义的叙事。</p>
+  <p>这个能力在进化上是有价值的——快速从经验中提取规律，帮助我们在危险的环境里生存。但在复杂的现代世界，它成了一个巨大的盲区：我们把随机性编织成了命运，把偶然成功编织成了必然。</p>
+</div>
+
+<div class="twocol">
+  <div class="col-block bad">
+    <h3>叙事谬误的典型表现</h3>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>金融危机之后，所有分析师都说"这其实是可以预见的"——但没有人提前做出了准确的公开预测</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>成功的企业家被描述为"有远见、敢冒险"——失败的企业家也有同样的特质，只是运气不同</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>历史书把各种偶然事件编成"历史的必然进程"，实际上任何一个小节点的不同，历史都会完全不同</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>医学案例报告：治好了的就是成功案例，但没有人统计"同样治疗方案下"有多少人没治好</p></div>
+  </div>
+  <div class="col-block good">
+    <h3>为什么故事让我们更危险</h3>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>故事让事件看起来比实际上更可预测，给了我们虚假的安全感</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>故事的结构是线性的因果，但现实是非线性的——小原因可能导致巨大后果</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>我们更容易记住有故事的解释，即使这个故事是编造的，也比无聊的"这是随机的"更有说服力</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>叙事给了我们"下次可以预测"的幻觉——于是下一个黑天鹅来临时，我们依然毫无准备</p></div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">多巴胺与因果感</div>
+  <h3>大脑被设计成"因果发现机器"</h3>
+  <p>神经科学研究发现，当我们发现一个因果关系时（即使是假的），大脑会释放多巴胺，产生愉悦感。这意味着<strong>构造叙事本身就是有奖励的</strong>——不管叙事是否准确。</p>
+  <p>这解释了为什么即使被告知"这是随机的"，人们依然会强烈倾向于寻找"背后的原因"。我们对随机性有一种近乎本能的排斥——承认"这就是随机的"，在情感上是令人不安的。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     06 沉默证据
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">06</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念 · 第8章</div>
+    <div class="section-title">沉默证据：溺水者的牌位</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">沉默证据（Silent Evidence）</div>
+  <h3>我们只看到幸存者，看不到失败者</h3>
+  <p>古代有一个寺庙，展示着所有许愿后得救的海难幸存者画像，用来证明神的庇护。一位哲学家问：那些许了愿但依然溺死的人的画像呢？</p>
+  <p>这就是沉默证据——那些没有出现在历史记录里的失败者、淹死者、无声消失的人。他们是证明"这个策略不管用"的最关键证据，但我们永远看不到他们，因为失败者不会写书、不会接受采访、不会出现在案例研究里。</p>
+</div>
+
+<div class="concept-grid">
+  <div class="concept-card">
+    <h3>书店里的幸存者偏差</h3>
+    <p>所有关于"如何成功"的书都是成功者写的。做同样事情但失败了的人没有机会写书，或者写了也没人买。书店的存在本身就在制造一个关于成功的幻觉。</p>
+  </div>
+  <div class="concept-card">
+    <h3>投资神话的真相</h3>
+    <p>"十步成为百万富翁"的书里，那些成功案例只展示了极少数的幸运者，没有告诉你做同样事情失败的那99%的人的命运。</p>
+  </div>
+  <div class="concept-card">
+    <h3>游泳运动员的身材悖论</h3>
+    <p>游泳运动员有完美的身材，不是因为游泳塑造了完美身材，而是因为有完美身材的人更容易成为游泳冠军。我们把"幸存者的特征"错当成了"成功的原因"。</p>
+  </div>
+  <div class="concept-card">
+    <h3>卡萨诺瓦的运气</h3>
+    <p>卡萨诺瓦在他的回忆录里讲述了无数次死里逃生的奇迹，并把它们归功于命运的眷顾。实际上，每次"奇迹"都只是概率游戏的结果——只有活下来的人才能写回忆录。</p>
+  </div>
+</div>
+
+<div class="quote">
+  <p>历史和社会不是在爬行前进的，它们是在跳跃前进的。它从一个折叠跳到另一个折叠，中间几乎没有任何颤动。历史书里那些平滑的叙事，是一种对过去的暴力简化。</p>
+  <cite>— 塔勒布，《黑天鹅》第1章</cite>
+</div>
+
+<!-- ══════════════════════════════════════
+     07 预测的丑闻
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">07</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心批判 · 第10章</div>
+    <div class="section-title">预测的丑闻：专家为什么总是错的</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">预测的丑闻（The Scandal of Prediction）</div>
+  <h3>专家的预测能力，系统性地被高估</h3>
+  <p>政治学家菲利普·泰特洛克（Philip Tetlock）做了一个著名的研究，追踪了数百名专家的政治和经济预测，历时二十年。结论令人震惊：<strong>专家的预测准确率，并不显著高于随机猜测</strong>。更糟糕的是，那些最自信、最知名、在媒体上出镜最多的专家，往往预测最不准确。</p>
+  <p>塔勒布把这称为"预测的丑闻"——我们付给专家大量的钱，给他们巨大的社会权威，让他们制定影响亿万人的政策，但他们的预测能力从根本上就是有限的。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">认识论傲慢（Epistemic Arrogance）</div>
+  <h3>我们系统性地高估自己知道的，低估自己不知道的</h3>
+  <p>认识论傲慢是塔勒布对人类知识过度自信的总称：我们相信自己对世界的了解远超实际，低估了我们盲区的范围，低估了未知的未知（unknown unknowns）。</p>
+  <p>一个简单的测试：给某个专业问题打一个"90%置信区间"——也就是说，你90%确定真实答案在这个区间内。实验结果显示，大多数人的"90%置信区间"实际上只有40-50%的覆盖率，也就是说他们的实际不确定性是他们自以为的两倍以上。</p>
+</div>
+
+<div class="twocol">
+  <div class="col-block bad">
+    <h3>❌ 专家预测的结构性缺陷</h3>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>专家预测的是"最可能"的情景，但世界是被"最不可能"的情景所改变的</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>专家不用为错误的预测承担代价——说错了转移话题，说对了大肆宣传</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>预测使用的模型，都基于过去的数据，而黑天鹅的定义就是在过去数据中没有出现过</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>"从众效应"：专家倾向于给出和其他专家接近的预测，以避免显得异类</p></div>
+  </div>
+  <div class="col-block good">
+    <h3>✓ 什么样的预测是有用的</h3>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>短期、具体、可证伪的预测——"明天会下雨"比"未来十年经济走势"更有价值</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>有切肤之痛的预测——预测者把自己的钱押在预测上，而不只是发表评论</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>承认不确定性边界的预测——"我不知道，但如果发生X，后果会是Y"</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>关注脆弱性而不是概率——不问"会不会发生"，而问"如果发生，我能不能扛住"</p></div>
+  </div>
+</div>
+
+<div class="example">
+  <div class="example-label">原书例子：国家情报机构的失败</div>
+  <p>塔勒布指出，拥有世界上最多情报资源的机构——美国CIA、以色列摩萨德——也没能预测到苏联的解体、9·11袭击、阿拉伯之春。这不是因为这些机构无能，而是因为这些事件本质上是不可预测的黑天鹅。更多的情报分析员、更先进的模型、更多的数据，并不能让黑天鹅变得可预测。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     08 高斯谎言
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">08</div>
+  <div class="section-title-wrap">
+    <div class="section-label">统计学批判 · 第15-17章</div>
+    <div class="section-title">高斯钟形曲线的谎言</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">正态分布的局限</div>
+  <h3>钟形曲线在极端斯坦里是一个危险的谎言</h3>
+  <p>高斯正态分布（钟形曲线）是现代统计学和风险管理的基础。它预测极端值的概率会以指数级别快速下降——比如说，一个超过均值六个标准差的事件，在正态分布下应该几乎不可能发生（概率约为十亿分之一）。</p>
+  <p>但在金融市场，"六个标准差"的事件几乎每隔几年就会发生一次。为什么？因为金融市场不服从正态分布，它服从"胖尾分布"（Fat-tailed distribution）——极端事件发生的频率，远远超过正态分布的预测。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">胖尾分布（Fat Tails）</div>
+  <h3>罕见事件比模型预测的更常见，后果也更极端</h3>
+  <p>胖尾分布的"尾部"比正态分布厚得多——极端事件不是"可以忽略的异常值"，而是会定期发生的现实。2008年金融危机、1987年股市崩盘、长期资本管理公司（LTCM）的崩溃，都是金融模型认为"概率近乎为零"的事件，但它们都发生了。</p>
+  <p>更可怕的是：那些极端事件不只是"比正态分布更常见"，它们的后果也是不成比例地大。在极端斯坦里，一个极端事件可能抹去所有之前积累的收益，甚至造成远超之前总收益的损失。</p>
+</div>
+
+<div class="example">
+  <div class="example-label">原书例子：长期资本管理公司（LTCM）</div>
+  <p>LTCM是由两位诺贝尔经济学奖得主（默顿和斯科尔斯）创立的对冲基金，使用最先进的数学模型管理风险。他们的模型基于正态分布，计算出他们的策略出现灾难性亏损的概率"几乎为零"。1998年，俄罗斯债务危机和亚洲金融风暴叠加触发了市场极端波动，LTCM在几周内损失了46亿美元，几乎引发全球金融危机，最终由美联储组织救援才避免崩溃。模型说"不可能"的事，发生了。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">分形与分形随机性</div>
+  <h3>曼德布罗特的遗产：自然界充满了胖尾</h3>
+  <p>塔勒布深受数学家伯努瓦·曼德布罗特（Benoît Mandelbrot）的影响——分形几何学的创始人。曼德布罗特早在1960年代就发现，棉花价格的波动不符合正态分布，而是服从幂律分布（power law）。</p>
+  <p>幂律分布意味着：大事件不是罕见的例外，而是系统的内在特征。城市大小的分布、地震强度的分布、财富的分布，都是幂律分布——少数极端值（最大的城市、最强的地震、最富有的人）主导了整体特征。这就是极端斯坦的数学本质。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     09 卢迪克谬误
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">09</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念 · 第9章</div>
+    <div class="section-title">卢迪克谬误：把现实当成游戏</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">卢迪克谬误（Ludic Fallacy）</div>
+  <h3>现实不是一个有已知规则的游戏</h3>
+  <p>卢迪克（Ludic）来自拉丁语 ludus，意思是"游戏"。卢迪克谬误是指：用游戏的逻辑来理解现实——以为现实有明确的规则，有限的可能性，可以用概率精确计算。</p>
+  <p>在游戏里（扑克、骰子、轮盘赌），所有可能的结果都是已知的，概率可以精确计算。但在现实世界里，你不知道所有可能的结果是什么——"未知的未知"（unknown unknowns）才是最危险的，而游戏模型根本无法处理未知的未知。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">胖托尼 vs 理论家约翰</div>
+  <h3>街头智慧 vs 学院派的对决</h3>
+  <p>塔勒布在第9章引入了胖托尼（Fat Tony）这个角色，用他和一个理论家"博士约翰"的对话来说明卢迪克谬误。</p>
+  <p>博士约翰问胖托尼：一枚硬币已经连续正面朝上了99次，下一次正面朝上的概率是多少？</p>
+  <p>博士约翰的答案：50%，因为每次抛硬币都是独立事件。</p>
+  <p>胖托尼的答案：我不知道，但大概率这枚硬币是有问题的（被做了手脚），或者你在骗我。我才不会用50%的概率赌这个。</p>
+  <p>谁的答案更接近现实？胖托尼。他不相信模型里的假设，他怀疑现实世界和"理论上的硬币"可能根本不一样。这就是对卢迪克谬误的免疫。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     10 如何共处
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">10</div>
+  <div class="section-title-wrap">
+    <div class="section-label">实践应用 · 第19章</div>
+    <div class="section-title">如何与黑天鹅共处</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">核心转变</div>
+  <h3>从"预测黑天鹅"转向"为黑天鹅做准备"</h3>
+  <p>塔勒布的核心建议是：放弃预测黑天鹅的幻想，转而构建能够在黑天鹅发生时存活甚至获益的系统。不是预测，而是准备；不是预见，而是韧性。</p>
+</div>
+
+<div class="sum-grid">
+  <div class="sg">
+    <div class="sg-n">1</div>
+    <div class="sg-t">
+      <h3>区分正向黑天鹅和负向黑天鹅的暴露</h3>
+      <p>在负向黑天鹅领域（可能突然遭受灾难性损失的地方），要极度保守，确保任何单一事件不能把你打垮。在正向黑天鹅领域（可能突然爆发性获益的地方），要主动暴露，保留上行空间。</p>
+    </div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">2</div>
+    <div class="sg-t">
+      <h3>不要问"会不会发生"，而问"如果发生，我能扛住吗"</h3>
+      <p>与其花精力预测黑天鹅出现的概率（这是无效的），不如评估你对各种极端情景的脆弱性，然后减少脆弱性。</p>
+    </div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">3</div>
+    <div class="sg-t">
+      <h3>寻找不对称性：小损失，大收益</h3>
+      <p>错过火车是痛苦的，但如果你的日程安排得足够灵活，错过火车不是灾难，只是不便。让自己处于"如果出错，后果有限；如果出对，收益无限"的位置。</p>
+    </div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">4</div>
+    <div class="sg-t">
+      <h3>在可预测的领域预测，在不可预测的领域放弃预测</h3>
+      <p>天气预报五天内基本可靠（平庸斯坦），但经济预测十年走势是无意义的（极端斯坦）。把精力放在真正可预测的短期、具体的事情上，对长期宏观走势保持谦逊。</p>
+    </div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">5</div>
+    <div class="sg-t">
+      <h3>对正向机会保持开放</h3>
+      <p>塔勒布在第19章说：让自己处于能遇到正向黑天鹅的位置。多样化你的经历，保持好奇心，不要把所有赌注都押在预期的机会上——最大的机遇往往来自意外。</p>
+    </div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">6</div>
+    <div class="sg-t">
+      <h3>警惕切肤之痛缺失的"专家"</h3>
+      <p>只听那些对自己的预测有切肤之痛的人的建议——他们把自己的钱、声誉或职业押在了预测上。没有皮肤在游戏里的专家，给出错误建议没有代价，不值得信任。</p>
+    </div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">第19章：与黑天鹅和解</div>
+  <h3>错过火车不是痛苦，错过了都不知道才是</h3>
+  <p>塔勒布用一个比喻结束第19章：错过一班火车让你非常痛苦，但如果你根本没在火车站，就不会有这种痛苦。</p>
+  <p>不要把自己置于"必须赶上这班车"的处境——那意味着你的计划完全依赖于一个特定的结果出现。保留灵活性，让自己的目标和计划能够适应意外，这才是应对黑天鹅世界的正确姿态。</p>
+  <p>这个观点在《反脆弱》里被进一步发展成哑铃策略和选择权理论——这本书的结论，直接引向了下一本书的起点。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     11 总结
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">11</div>
+  <div class="section-title-wrap">
+    <div class="section-label">总结</div>
+    <div class="section-title">一句话，以及三部曲的位置</div>
+  </div>
+</div>
+
+<div class="formula">
+  <p>
+    历史不是渐进的，它是跳跃的。<br>
+    那些跳跃，来自<em>没有人能预测到的地方</em>。<br><br>
+    与其预测黑天鹅，不如让自己<em>在黑天鹅到来时活下去</em>。
+  </p>
+</div>
+
+<div class="tags">
+  <span class="tag hl">黑天鹅三特征：罕见·冲击大·事后可解释</span>
+  <span class="tag">平庸斯坦 vs 极端斯坦</span>
+  <span class="tag hl">叙事谬误</span>
+  <span class="tag">沉默证据</span>
+  <span class="tag hl">确认偏差</span>
+  <span class="tag">火鸡问题</span>
+  <span class="tag hl">预测的丑闻</span>
+  <span class="tag">认识论傲慢</span>
+  <span class="tag hl">胖尾分布</span>
+  <span class="tag">正态分布的局限</span>
+  <span class="tag">卢迪克谬误</span>
+  <span class="tag hl">胖托尼的街头智慧</span>
+  <span class="tag">不透明性三元组</span>
+  <span class="tag">可扩展性与赢者通吃</span>
+  <span class="tag hl">切肤之痛缺失</span>
+</div>
+
+<hr>
+
+<div style="background:var(--bg2); border-radius:4px; padding:24px 28px; margin-top:20px;">
+  <p style="font-size:0.85rem; color:var(--ink3); margin-bottom:12px;">Incerto 三部曲的完整逻辑链</p>
+  <p style="font-size:0.88rem; color:var(--ink2); line-height:2.2;">
+    <strong>《随机骗局》</strong>（2001）— 诊断层一：我们如何被日常随机性欺骗；幸存者偏差、认知偏差、情绪如何干扰判断。<br>
+    <strong>《黑天鹅》</strong>（2007）— 诊断层二：不只是日常随机性，极端事件主宰历史；正态分布是谎言；专家预测是幻觉。<br>
+    <strong>《反脆弱》</strong>（2012）— 处方：既然随机性和极端事件无法消除，如何重新设计系统，从无序中获益而不是受害。<br><br>
+    三部曲是一个递进的论证：看清随机性 → 看清极端随机性 → 学会利用随机性。
+  </p>
+</div>
+
+<footer>
+  Designed by 葱头爸爸 · liamphoenixwayne@outlook.com
+</footer>
+
+</div>
+</body>
+</html>

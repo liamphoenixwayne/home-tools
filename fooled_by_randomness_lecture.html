@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>随机骗局 · 讲课稿</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --bg:      #f5f2ec;
+    --bg2:     #ece8df;
+    --card:    #ffffff;
+    --ink:     #1c1814;
+    --ink2:    #4a443c;
+    --ink3:    #7a7268;
+    --accent:  #3a5a8b;
+    --accent2: #6a9ac4;
+    --line:    #d4cfc6;
+    --green:   #2e7d52;
+    --red:     #a93226;
+    --amber:   #c4763a;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.8;
+  }
+
+  /* ── COVER ── */
+  .cover {
+    background: #1c2b3a;
+    padding: 80px 40px;
+    margin-bottom: 64px;
+  }
+  .cover-inner { max-width: 860px; margin: 0 auto; }
+  .cover-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #5a7090;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .cover-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(2.8rem, 6vw, 4.8rem);
+    font-weight: 700;
+    color: #eef2f7;
+    line-height: 1.1;
+    margin-bottom: 16px;
+  }
+  .cover-sub {
+    font-size: 1rem;
+    color: #5a7090;
+    font-weight: 300;
+    margin-bottom: 48px;
+  }
+  .cover-meta {
+    font-size: 0.82rem;
+    color: #3a4f60;
+    border-top: 1px solid #253545;
+    padding-top: 18px;
+  }
+
+  /* ── LAYOUT ── */
+  .page { max-width: 860px; margin: 0 auto; padding: 0 40px 100px; }
+
+  .reading-time {
+    display: inline-block;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    padding: 6px 16px;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    color: var(--ink3);
+    margin-bottom: 48px;
+  }
+
+  /* ── SECTION HEADER ── */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin: 64px 0 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-num {
+    font-family: 'EB Garamond', serif;
+    font-size: 3rem;
+    color: var(--line);
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .section-label {
+    font-size: 0.75rem;
+    color: var(--accent);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    margin-bottom: 4px;
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+  }
+  .section-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(1.4rem, 3vw, 2rem);
+    font-weight: 700;
+    color: var(--ink);
+    line-height: 1.2;
+  }
+
+  /* ── BLOCKS ── */
+  .block {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 32px 36px;
+    margin-bottom: 20px;
+  }
+  .block-label {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 0.85rem;
+    color: var(--accent);
+    letter-spacing: 0.06em;
+    margin-bottom: 12px;
+  }
+  .block h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.15rem;
+    font-weight: 600;
+    margin-bottom: 12px;
+    color: var(--ink);
+  }
+  .block p {
+    font-size: 0.95rem;
+    color: var(--ink2);
+    font-weight: 300;
+    line-height: 1.85;
+  }
+  .block p + p { margin-top: 10px; }
+
+  /* ── QUOTE ── */
+  .quote {
+    border-left: 3px solid var(--accent);
+    background: var(--bg2);
+    padding: 18px 24px;
+    border-radius: 0 4px 4px 0;
+    margin-bottom: 20px;
+  }
+  .quote p {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.98rem;
+    font-style: italic;
+    color: var(--ink);
+    font-weight: 400;
+    line-height: 1.8;
+  }
+  .quote cite {
+    display: block;
+    margin-top: 8px;
+    font-size: 0.78rem;
+    color: var(--ink3);
+    font-style: normal;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+
+  /* ── FORMULA ── */
+  .formula {
+    background: #1c2b3a;
+    border-radius: 4px;
+    padding: 28px 36px;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .formula p {
+    font-family: 'EB Garamond', serif;
+    font-size: clamp(1.1rem, 2.2vw, 1.6rem);
+    color: #eef2f7;
+    line-height: 1.7;
+  }
+  .formula em { color: var(--accent2); font-style: normal; }
+
+  /* ── TWO COL ── */
+  .twocol {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .col-block {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 24px 22px;
+  }
+  .col-block.bad  { border-top: 3px solid var(--red); }
+  .col-block.good { border-top: 3px solid var(--green); }
+  .col-block.neutral { border-top: 3px solid var(--accent); }
+  .col-block h3 { font-family: 'Noto Serif SC', serif; font-size: 0.95rem; margin-bottom: 14px; }
+
+  /* ── LIST ── */
+  .li {
+    display: flex;
+    gap: 12px;
+    margin-bottom: 12px;
+    align-items: flex-start;
+  }
+  .li-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    margin-top: 9px;
+    flex-shrink: 0;
+  }
+  .li p { font-size: 0.88rem; color: var(--ink2); font-weight: 300; }
+
+  /* ── BIAS CARDS ── */
+  .bias-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .bias-card {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 20px 22px;
+    border-left: 3px solid var(--accent2);
+  }
+  .bias-card h3 {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 0.92rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: var(--ink);
+  }
+  .bias-card p { font-size: 0.84rem; color: var(--ink3); font-weight: 300; line-height: 1.65; }
+
+  /* ── CHAR COMPARE ── */
+  .char-compare {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .char-card {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 24px 22px;
+  }
+  .char-card.nero  { border-top: 3px solid var(--green); }
+  .char-card.john  { border-top: 3px solid var(--red); }
+  .char-name {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+  .char-card.nero .char-name { color: var(--green); }
+  .char-card.john .char-name { color: var(--red); }
+  .char-sub { font-size: 0.78rem; color: var(--ink3); margin-bottom: 14px; font-style: italic; }
+  .char-card p { font-size: 0.86rem; color: var(--ink2); font-weight: 300; line-height: 1.7; }
+
+  /* ── SUMMARY GRID ── */
+  .sum-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin-bottom: 20px;
+  }
+  .sg {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 18px 20px;
+    display: flex;
+    gap: 14px;
+  }
+  .sg-n {
+    font-family: 'EB Garamond', serif;
+    font-size: 1.4rem;
+    color: var(--accent);
+    line-height: 1;
+    flex-shrink: 0;
+    width: 24px;
+  }
+  .sg-t h3 { font-size: 0.88rem; margin-bottom: 4px; font-family: 'Noto Serif SC', serif; }
+  .sg-t p  { font-size: 0.82rem; color: var(--ink3); font-weight: 300; }
+
+  /* ── TAGS ── */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag {
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 5px 12px;
+    font-size: 0.8rem;
+    color: var(--ink2);
+  }
+  .tag.hl { background: var(--accent); color: white; border-color: var(--accent); }
+
+  /* ── DIVIDER ── */
+  hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 32px 0 0;
+    font-size: 0.75rem;
+    color: var(--ink3);
+    border-top: 1px solid var(--line);
+    margin-top: 64px;
+  }
+
+  /* ── TIMELINE ── */
+  .timeline { margin-bottom: 20px; }
+  .tl-item { display: flex; gap: 20px; }
+  .tl-left { display: flex; flex-direction: column; align-items: center; width: 20px; flex-shrink: 0; }
+  .tl-dot { width: 10px; height: 10px; border-radius: 50%; background: var(--accent); flex-shrink: 0; margin-top: 5px; }
+  .tl-line { width: 1px; flex: 1; background: var(--line); min-height: 16px; margin: 3px 0; }
+  .tl-content { padding-bottom: 20px; flex: 1; }
+  .tl-content h3 { font-family: 'Noto Serif SC', serif; font-size: 0.92rem; margin-bottom: 4px; }
+  .tl-content p  { font-size: 0.86rem; color: var(--ink2); font-weight: 300; line-height: 1.7; }
+
+  @media (max-width: 640px) {
+    .page { padding: 0 20px 80px; }
+    .cover { padding: 60px 20px; }
+    .twocol, .char-compare, .bias-grid, .sum-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- COVER -->
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Nassim Nicholas Taleb · 2001 · 讲课稿</div>
+    <div class="cover-title">随机骗局</div>
+    <div class="cover-sub">机遇在生活与市场中扮演的隐秘角色 · 重新整理的逻辑顺序</div>
+    <div class="cover-meta">约 30 分钟讲解 · 本稿按教学逻辑重新编排，非原书章节顺序</div>
+  </div>
+</div>
+
+<div class="page">
+<div class="reading-time">📖 建议讲解时间：30 分钟</div>
+
+<!-- ══════════════════════════════════
+     第一部分：核心命题
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">01</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心命题</div>
+    <div class="section-title">我们系统性地低估了随机性的作用</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">全书的出发点</div>
+  <h3>成功真的是能力的证明吗？</h3>
+  <p>塔勒布用两个虚构人物开场：尼禄（Nero）和约翰（John）。两个人都在金融市场工作，但思维方式截然不同。约翰连续几年赚大钱，被同行和媒体称为天才；尼禄表现平平，甚至被认为太保守。</p>
+  <p style="margin-top:10px;">然后约翰在一次意外的市场波动中爆仓，一夜归零。尼禄安然无恙，继续他平淡但稳定的职业生涯。</p>
+  <p style="margin-top:10px;">塔勒布的问题是：在结果揭晓之前，我们有没有办法判断，约翰的成功是真实能力，还是运气？</p>
+</div>
+
+<div class="char-compare">
+  <div class="char-card nero">
+    <div class="char-name">尼禄</div>
+    <div class="char-sub">理解随机性的交易员</div>
+    <p>知道市场本质上是随机的，不追求最大收益，只追求"活下去"。总被认为太保守、不够聪明，但他的策略是在为低概率的灾难事件做准备，即使那些事件可能永远不发生。</p>
+  </div>
+  <div class="char-card john">
+    <div class="char-name">约翰</div>
+    <div class="char-sub">被随机性蒙蔽的成功者</div>
+    <p>把运气当成能力，把短期成功当成长期有效的策略。每次成功都强化了他的自信，却没有意识到自己正在积累尾部风险——直到市场的一次黑天鹅事件清空了他所有的赢利。</p>
+  </div>
+</div>
+
+<div class="formula">
+  <p>
+    核心命题：<br>
+    我们看到的成功者，是<em>幸存者</em>，<br>
+    不是最有能力的人。
+  </p>
+</div>
+
+<!-- ══════════════════════════════════
+     第二部分：幸存者偏差
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">02</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念一</div>
+    <div class="section-title">幸存者偏差：我们只看到赢家</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">打字机前的猴子</div>
+  <h3>给足够多的猴子，总有一只会打出莎士比亚</h3>
+  <p>塔勒布的思想实验：让一百万只猴子随机敲打键盘，统计学上，其中一只最终会打出《哈姆雷特》。如果你只看到这只猴子，你会误以为它是天才。</p>
+  <p style="margin-top:10px;">这就是金融市场的真实情况。每年有数万名交易员在市场上操作，即使所有人的决策都是随机的，也会有少数人连续几年赚钱——纯粹因为概率分布。这些人会被媒体追捧为"传奇投资者"，会出书、开课、接受采访，但他们的成功很可能只是随机的结果。</p>
+</div>
+
+<div class="twocol">
+  <div class="col-block bad">
+    <h3>❌ 我们看到的（幸存者）</h3>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>连续5年跑赢市场的基金经理</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>从车库创业成为亿万富翁的企业家</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>每次预测都准确的股市分析师</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>书店里摆满成功人士写的创业方法论</p></div>
+  </div>
+  <div class="col-block good">
+    <h3>✓ 我们看不到的（沉默证据）</h3>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>另外一万个做同样事情但失败了的基金经理</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>九十九个从车库创业但没有成功的人</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>预测失败的分析师——他们已经悄悄离开了这个行业</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>所有失败的创业方法论，因为失败者没有机会出书</p></div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">沉默证据（Silent Evidence）</div>
+  <h3>历史只记录了幸存者，失败者是无声的</h3>
+  <p>塔勒布把这些被忽略的失败案例称为"沉默证据"。它们不出现在媒体里，不写在商业书籍里，不被人讨论，但它们才是评估一个策略真实有效性的关键数据。</p>
+  <p style="margin-top:10px;">如果我们在做判断时只看到幸存者，就会系统性地高估任何策略的成功概率，低估失败的真实风险。</p>
+</div>
+
+<div class="quote">
+  <p>我们总是赞美胜利者，却从不问：在同样的情况下，有多少人做了同样的事情但失败了？</p>
+  <cite>— 塔勒布，《随机骗局》第8章</cite>
+</div>
+
+<!-- ══════════════════════════════════
+     第三部分：另类历史
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">03</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念二</div>
+    <div class="section-title">另类历史：考虑没有发生的事</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">概率性的世界观</div>
+  <h3>评估决策，不能只看结果</h3>
+  <p>塔勒布提出一个根本性的观念转变：判断一个决策的好坏，不应该只看最终结果，而应该看<strong>在决策时刻，所有可能发生的历史的总集合</strong>。</p>
+  <p style="margin-top:10px;">一个俄罗斯轮盘赌的幸存者不能用"我活下来了"来证明这个决定是正确的。在决策时刻，他有五分之一的概率死亡。结果只是众多可能性中随机实现的一个。</p>
+</div>
+
+<div class="twocol">
+  <div class="col-block bad">
+    <h3>❌ 错误的评估方式</h3>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>这次押对了，所以我的判断是正确的</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>过去十年这个策略一直有效，未来也会有效</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>他成功了，所以他的方法是对的</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>这件事发生了，所以它是可预测的</p></div>
+  </div>
+  <div class="col-block good">
+    <h3>✓ 正确的评估方式</h3>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>在决策时，这个押注的期望值是多少？</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>在我没有看到的那些另类历史里，这个策略表现如何？</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>做同样事情的所有人的平均结果是什么？</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>这件事发生之前，没人能预测它——后见之明是幻觉</p></div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">蒙地卡罗模拟</div>
+  <h3>用计算机生成"另类历史"</h3>
+  <p>塔勒布作为交易员，大量使用蒙地卡罗模拟——让计算机按照一定的概率分布，随机生成数千个"可能的历史"，看看一个策略在所有这些历史里的表现分布。</p>
+  <p style="margin-top:10px;">这个方法的启示是：即使一个策略在你观察到的历史里表现优异，也可能是因为你恰好处于对它有利的那段历史，而不是因为策略本身有效。</p>
+  <p style="margin-top:10px;"><strong>运气好的策略 vs 真正有效的策略</strong>——最大的区别在于，真正有效的策略在大多数另类历史里都能表现不错，而幸运的策略只在少数历史里有效。</p>
+</div>
+
+<!-- ══════════════════════════════════
+     第四部分：归纳法的陷阱
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">04</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念三</div>
+    <div class="section-title">归纳法的问题：过去不能预测未来</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">黑天鹅的逻辑</div>
+  <h3>一千只白天鹅，不能证明天鹅都是白的</h3>
+  <p>这是哲学家休谟提出的归纳法问题，塔勒布把它放到金融和现实决策中。一个人观察了一千次日出，无法证明明天太阳一定会升起；一个策略在过去二十年有效，无法证明下一年它仍然有效。</p>
+  <p style="margin-top:10px;">只需要一只黑天鹅，就能推翻"天鹅都是白的"这个结论。这就是为什么历史上大量被认为"绝对安全"的策略，最终都遭遇了灾难性的失败。</p>
+</div>
+
+<div class="quote">
+  <p>一只火鸡在农场里被喂养了一千天，每一天的经验都告诉它：人类是友善的、食物是丰盛的、生活是安全的。直到感恩节前的那个星期三。</p>
+  <cite>— 塔勒布，《随机骗局》第7章（火鸡的比喻）</cite>
+</div>
+
+<div class="block">
+  <div class="block-label">非线性世界</div>
+  <h3>小事件可能引发大结果</h3>
+  <p>历史不是线性的。一个微小的随机事件，可能触发完全不成比例的巨大后果。加夫里洛·普林西普在萨拉热窝开了一枪，引发了第一次世界大战。</p>
+  <p style="margin-top:10px;">这意味着：用线性模型（如果A那么B）来预测非线性的现实，在绝大多数情况下会失败。我们高度依赖的经济预测模型、风险管理模型，都建立在线性假设上，这让它们在极端事件发生时完全失效。</p>
+</div>
+
+<!-- ══════════════════════════════════
+     第五部分：认知偏差
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">05</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念四</div>
+    <div class="section-title">我们是概率盲：大脑天生不会处理随机性</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">第11章——全书最重要的章节</div>
+  <h3>人类大脑的系统性错误</h3>
+  <p>塔勒布认为第11章是全书最核心的章节。他综合了大量心理学和行为经济学研究，说明人类大脑在面对概率和随机性时会系统性地犯错。这不是个别人的问题，是所有人的问题——包括受过训练的专家。</p>
+</div>
+
+<div class="bias-grid">
+  <div class="bias-card">
+    <h3>寻找模式的冲动</h3>
+    <p>大脑天生要在任何数据里寻找规律，即使数据是纯粹随机的。这在进化上有意义，但在现代金融和决策中会制造幻觉。</p>
+  </div>
+  <div class="bias-card">
+    <h3>后见之明偏差</h3>
+    <p>事情发生之后，我们总觉得它是"显而易见"的，忘记了在事前我们根本无法预测。2008年金融危机之后人人都说"这是可以预见的"。</p>
+  </div>
+  <div class="bias-card">
+    <h3>叙事谬误</h3>
+    <p>我们把随机事件编织成有逻辑的故事来理解世界。这让世界看起来比实际上更有秩序、更可预测、更合理。</p>
+  </div>
+  <div class="bias-card">
+    <h3>可得性偏差</h3>
+    <p>我们更容易想到的事情，就会觉得它发生的概率更高。飞机失事新闻上了头条，但开车的死亡率远高于坐飞机。</p>
+  </div>
+  <div class="bias-card">
+    <h3>过度自信</h3>
+    <p>人们系统性地高估自己预测未来的能力。专业经济学家的预测平均而言并不比随机猜测更准确。</p>
+  </div>
+  <div class="bias-card">
+    <h3>偏斜盲视</h3>
+    <p>人们关注事件发生的概率，但忽略事件的量级。一个有1%概率让你损失100%的赌局，比一个有99%概率让你赚1%的赌局危险得多——但大多数人选错。</p>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">概率 vs 期望值</div>
+  <h3>不能只看概率，要看期望值</h3>
+  <p>这是塔勒布反复强调的核心错误：大多数人只关注一件事发生的概率，却忽略了它发生时的后果有多大。</p>
+  <p style="margin-top: 10px;">正确的思维方式是期望值：<strong>概率 × 后果大小</strong>。一个有10%概率赔光所有钱的策略，比一个有90%概率小赚的策略危险得多，即使后者发生的概率更高。</p>
+  <p style="margin-top:10px;">这解释了为什么很多看起来"稳健"的金融策略会突然崩溃——它们把低概率的灾难性损失当成"几乎不可能发生"而忽略了。</p>
+</div>
+
+<!-- ══════════════════════════════════
+     第六部分：噪音 vs 信号
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">06</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念五</div>
+    <div class="section-title">噪音与信号：信息越多，被骗越深</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">媒体与市场噪音</div>
+  <h3>大多数你看到的"信息"都是噪音</h3>
+  <p>塔勒布区分了信号（真正有意义的信息）和噪音（随机波动被包装成"信息"）。问题是，噪音和信号在外表上是完全一样的——两者都是"新闻"，都声称在解释市场的走势。</p>
+  <p style="margin-top:10px;">一个思想实验：假设市场的真实年化收益率是15%，年化波动率是10%。如果你每年看一次投资组合，你大约有93%的时间会看到正的收益；如果你每天看，大约只有54%的时间是正的；如果你每小时看，大约有51%的时间是正的——几乎和抛硬币一样。</p>
+  <p style="margin-top:10px;"><strong>看得越频繁，看到的噪音比例越高，正确信号越少。</strong></p>
+</div>
+
+<div class="quote">
+  <p>如果你每分钟都在看股价，你会产生强烈的情绪，做出大量的决策，但你看到的几乎全是随机波动，而不是任何有意义的信息。</p>
+  <cite>— 塔勒布，《随机骗局》第9章</cite>
+</div>
+
+<div class="block">
+  <div class="block-label">进化与随机性</div>
+  <h3>进化不能筛选出"理解随机性"的能力</h3>
+  <p>为什么人类这么容易被随机性欺骗？塔勒布给出了一个进化论的解释：我们的大脑是为了短期生存进化的，不是为了处理统计学问题。</p>
+  <p style="margin-top:10px;">在原始环境中，听到树丛沙沙声就立刻判断"是老虎"并逃跑，即使绝大多数时候都是误报，也是合理的——因为那一次是真老虎时，代价是死亡。但这种"宁可误报不可漏报"的思维模式，放到现代金融市场里会产生大量错误决策。</p>
+  <p style="margin-top:10px;">更糟糕的是：进化甚至可能"误判"了适者生存的规则。短期赢家不一定是最适合长期生存的，只是在当前这段特定历史里最幸运的。</p>
+</div>
+
+<!-- ══════════════════════════════════
+     第七部分：情绪与理性
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">07</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念六</div>
+    <div class="section-title">情绪不会因为你懂道理而消失</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">蜡塞耳朵的奥德修斯</div>
+  <h3>知道海妖的歌声是危险的，但依然想听</h3>
+  <p>荷马史诗里，奥德修斯想听海妖的歌声，但知道那会让人失去理智。他的解决方案不是克制欲望，而是命令手下把自己绑在桅杆上，堵上所有人的耳朵，然后让船开过去。</p>
+  <p style="margin-top:10px;">塔勒布用这个比喻说明：理性不足以对抗情绪。即使你完全理解随机性的道理，当你看到投资组合亏损时，你依然会感到痛苦，依然会冲动地想做点什么。这不是软弱，这是人类神经系统的基本配置。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">赌徒的迷信</div>
+  <h3>我们把随机奖励当成因果关系</h3>
+  <p>心理学实验：把鸽子放进一个箱子，随机给它们食物，和它们的行为毫无关系。鸽子很快就开始重复它们碰巧在得到食物前做过的动作——转圈、点头、踱步。它们误以为自己的行为导致了食物的出现。</p>
+  <p style="margin-top:10px;">人类完全一样。一个交易员在某次成功的交易前碰巧喝了咖啡，之后每次交易前都会喝咖啡。一个运动员穿了某双袜子赢了比赛，就变成了他的幸运袜。这些都是把随机结果误读成了因果关系。</p>
+  <p style="margin-top:10px;"><strong>迷信的本质，是大脑在随机中强行找到模式。</strong></p>
+</div>
+
+<div class="block">
+  <div class="block-label">塔勒布自己的方案</div>
+  <h3>不是理性胜过情绪，而是设计系统绕开情绪</h3>
+  <p>塔勒布坦承，他自己也无法完全控制情绪反应。他看到账户亏损依然会难受，他知道新闻是噪音但依然忍不住看。</p>
+  <p style="margin-top:10px;">他的解决方案不是"更理性"，而是像奥德修斯一样，提前设计好规则，把自己"绑在桅杆上"——提前设好仓位限制、止损规则、不看盘的时间窗口。用系统的纪律代替情绪时刻的判断。</p>
+</div>
+
+<!-- ══════════════════════════════════
+     第八部分：偏态与不对称
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">08</div>
+  <div class="section-title-wrap">
+    <div class="section-label">核心概念七</div>
+    <div class="section-title">偏态与不对称：小概率大损失最危险</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">偏斜分布</div>
+  <h3>大多数时候赢一点，偶尔输很多</h3>
+  <p>很多金融策略有一个隐藏的结构：高概率的小收益，加上低概率的巨大损失。这种结构在大多数时候看起来非常稳健，长期统计却是负期望值的。</p>
+  <p style="margin-top:10px;">塔勒布把这叫做"在压路机前捡硬币"——你有99%的概率捡到一枚硬币，有1%的概率被压路机碾过去。长期来看，这个游戏会让你破产。</p>
+</div>
+
+<div class="twocol">
+  <div class="col-block bad">
+    <h3>❌ 隐藏的负期望值策略</h3>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>卖出期权收取权利金——大多数时间赚小钱，偶尔爆仓</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>高杠杆债券策略——平时稳定，利率突变时灾难</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>均值回归策略——大多数时候有效，极端行情时毁灭</p></div>
+  </div>
+  <div class="col-block good">
+    <h3>✓ 塔勒布偏好的策略方向</h3>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>大多数时候损失小额权利金，偶尔爆发式获利</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>收益是凸性的：损失有上限，收益无上限</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>在极端事件（黑天鹅）发生时，成为受益方而不是受害方</p></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     第九部分：如何应对
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">09</div>
+  <div class="section-title-wrap">
+    <div class="section-label">实践应用</div>
+    <div class="section-title">面对随机性，应该怎么做</div>
+  </div>
+</div>
+
+<div class="sum-grid">
+  <div class="sg">
+    <div class="sg-n">1</div>
+    <div class="sg-t"><h3>考虑另类历史，不只看结果</h3><p>评估一个决策时，想象所有可能发生的情况，不只是实际发生的那个。一次成功不能证明策略是对的。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">2</div>
+    <div class="sg-t"><h3>关注期望值，不只是概率</h3><p>小概率但灾难性的损失，比高概率的小收益更值得警惕。始终问：如果最坏情况发生，损失是多少？</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">3</div>
+    <div class="sg-t"><h3>少看噪音，减少决策频率</h3><p>看盘越频繁，接触到的噪音越多，做出错误决策的机会越多。提前设好规则，不要在情绪时刻做决定。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">4</div>
+    <div class="sg-t"><h3>警惕幸存者偏差</h3><p>在学习任何成功案例时，问：做同样事情的人里，有多少失败了？失败者的沉默，是对方法论最大的质疑。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">5</div>
+    <div class="sg-t"><h3>设计系统，绕开情绪</h3><p>不要依赖理性战胜情绪。提前把决策规则写下来，用纪律代替临场判断——就像奥德修斯把自己绑在桅杆上。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">6</div>
+    <div class="sg-t"><h3>接受不确定性，不要假装能预测</h3><p>预测未来是幻觉。与其花精力预测，不如构建一个在任何情况下都能活下去的系统——这是全书最终的落脚点。</p></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     总结
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">10</div>
+  <div class="section-title-wrap">
+    <div class="section-label">总结</div>
+    <div class="section-title">一句话</div>
+  </div>
+</div>
+
+<div class="formula">
+  <p>
+    成功不一定是能力的证明，<br>
+    失败不一定是能力的否定——<br>
+    <em>随机性的角色，远比我们愿意承认的大。</em>
+  </p>
+</div>
+
+<div class="tags">
+  <span class="tag">幸存者偏差</span>
+  <span class="tag">沉默证据</span>
+  <span class="tag hl">另类历史：考虑没发生的事</span>
+  <span class="tag">期望值 ≠ 概率</span>
+  <span class="tag hl">大脑是概率盲</span>
+  <span class="tag">叙事谬误</span>
+  <span class="tag">后见之明偏差</span>
+  <span class="tag hl">噪音 vs 信号</span>
+  <span class="tag">偏态分布</span>
+  <span class="tag">用系统绕开情绪</span>
+  <span class="tag">接受不确定性</span>
+</div>
+
+<hr>
+
+<div style="background:var(--bg2); border-radius:4px; padding:24px 28px; margin-top:20px;">
+  <p style="font-size:0.85rem; color:var(--ink3); margin-bottom:8px;">与《反脆弱》的关系</p>
+  <p style="font-size:0.88rem; color:var(--ink2); line-height:2;">
+    《随机骗局》是诊断：揭示我们如何被随机性欺骗，我们的认知偏差在哪里。<br>
+    《反脆弱》是处方：既然随机性无法消除，如何设计自己，从随机性中获益而不是受害。<br>
+    两本书是同一套思想的两个方向——先看清问题，再给出方案。
+  </p>
+</div>
+
+<footer>
+  Designed by 葱头爸爸 · liamphoenixwayne@outlook.com
+</footer>
+
+</div><!-- /page -->
+</body>
+</html>
