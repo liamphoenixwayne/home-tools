@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>沉思录 v2.0 · 讲课稿</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --bg:      #f0ede6;
+    --bg2:     #e4e0d6;
+    --card:    #ffffff;
+    --ink:     #1a1714;
+    --ink2:    #45403a;
+    --ink3:    #7a7468;
+    --accent:  #5c3d1e;
+    --accent2: #a0784a;
+    --line:    #d0c8b8;
+    --stone:   #8a8278;
+    --green:   #2e6e3a;
+    --red:     #8b2020;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Noto Sans SC', sans-serif; background: var(--bg); color: var(--ink); line-height: 1.8; }
+
+  /* COVER */
+  .cover { background: #12100d; padding: 80px 40px 72px; margin-bottom: 64px; }
+  .cover-inner { max-width: 900px; margin: 0 auto; }
+  .cover-eyebrow { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1rem; color: #4a4238; letter-spacing: 0.08em; margin-bottom: 20px; }
+  .cover-title { font-family: 'Noto Serif SC', serif; font-size: clamp(2.8rem, 6vw, 5rem); font-weight: 700; color: #ede8de; line-height: 1.1; margin-bottom: 8px; }
+  .cover-latin { font-family: 'EB Garamond', serif; font-style: italic; font-size: 1.1rem; color: #6a5c48; margin-bottom: 32px; letter-spacing: 0.04em; }
+  .cover-badge { display: inline-block; background: var(--accent); color: #ede8de; font-size: 0.72rem; padding: 3px 12px; border-radius: 2px; letter-spacing: 0.06em; margin-bottom: 16px; }
+  .cover-sub { font-size: 0.95rem; color: #4a4238; font-weight: 300; line-height: 1.75; margin-bottom: 48px; max-width: 600px; }
+  .cover-meta { font-size: 0.82rem; color: #32281e; border-top: 1px solid #221a10; padding-top: 18px; }
+
+  /* PAGE */
+  .page { max-width: 900px; margin: 0 auto; padding: 0 40px 100px; }
+  .reading-time { display: inline-block; background: var(--bg2); border: 1px solid var(--line); padding: 6px 16px; border-radius: 2px; font-size: 0.8rem; color: var(--ink3); margin-bottom: 16px; }
+
+  /* INTRO */
+  .intro-box { background: var(--card); border-left: 3px solid var(--accent2); border-radius: 0 4px 4px 0; padding: 24px 28px; margin-bottom: 48px; }
+  .intro-box p { font-size: 0.92rem; color: var(--ink2); font-weight: 300; line-height: 1.85; }
+  .intro-box p + p { margin-top: 10px; }
+
+  /* TOC */
+  .toc { background: var(--card); border-radius: 4px; padding: 28px 32px; margin-bottom: 48px; border-left: 3px solid var(--accent); }
+  .toc h3 { font-family: 'Noto Serif SC', serif; font-size: 0.9rem; margin-bottom: 16px; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.1em; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .toc-item { font-size: 0.84rem; color: var(--ink2); display: flex; gap: 12px; align-items: baseline; }
+  .toc-num { font-family: 'EB Garamond', serif; color: var(--accent); flex-shrink: 0; width: 20px; font-size: 1rem; }
+
+  /* SECTION */
+  .section-header { display: flex; align-items: baseline; gap: 20px; margin: 72px 0 32px; padding-bottom: 16px; border-bottom: 2px solid var(--ink); }
+  .section-num { font-family: 'EB Garamond', serif; font-size: 3rem; color: var(--line); line-height: 1; flex-shrink: 0; }
+  .section-label { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; font-family: 'EB Garamond', serif; font-style: italic; }
+  .section-title { font-family: 'Noto Serif SC', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .section-note { font-size: 0.78rem; color: var(--ink3); margin-top: 4px; }
+
+  /* BLOCKS */
+  .block { background: var(--card); border-radius: 4px; padding: 32px 36px; margin-bottom: 20px; }
+  .block-label { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 12px; }
+  .block h3 { font-family: 'Noto Serif SC', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 14px; color: var(--ink); }
+  .block p { font-size: 0.95rem; color: var(--ink2); font-weight: 300; line-height: 1.85; }
+  .block p + p { margin-top: 12px; }
+
+  /* 核心思想卡片 — 中文意译 + 出处 */
+  .idea-card {
+    background: var(--bg2);
+    border-left: 3px solid var(--accent);
+    border-radius: 0 4px 4px 0;
+    padding: 20px 28px;
+    margin: 16px 0;
+  }
+  .idea-text {
+    font-family: 'Noto Serif SC', serif;
+    font-size: 1.02rem;
+    color: var(--ink);
+    line-height: 1.9;
+    font-weight: 400;
+    margin-bottom: 10px;
+  }
+  .idea-ref {
+    font-size: 0.74rem;
+    color: var(--stone);
+    letter-spacing: 0.04em;
+    font-family: 'Noto Sans SC', sans-serif;
+  }
+  .idea-ref em { font-style: italic; color: var(--accent2); }
+
+  /* 双列卡片 */
+  .idea-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .idea-single { margin-bottom: 20px; }
+
+  /* 解读块 — 深色背景强调 */
+  .insight {
+    background: var(--card);
+    border-radius: 4px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    border-top: 2px solid var(--accent2);
+  }
+  .insight-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent2); margin-bottom: 8px; font-family: 'EB Garamond', serif; font-style: italic; }
+  .insight h3 { font-family: 'Noto Serif SC', serif; font-size: 0.98rem; font-weight: 600; margin-bottom: 10px; color: var(--ink); }
+  .insight p { font-size: 0.9rem; color: var(--ink2); font-weight: 300; line-height: 1.85; }
+  .insight p + p { margin-top: 10px; }
+
+  /* 概念对比 */
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .col-block { background: var(--card); border-radius: 4px; padding: 22px 24px; }
+  .col-block.good { border-top: 3px solid var(--green); }
+  .col-block.bad  { border-top: 3px solid var(--red); }
+  .col-block.neutral { border-top: 3px solid var(--accent2); }
+  .col-block h3 { font-family: 'Noto Serif SC', serif; font-size: 0.95rem; margin-bottom: 12px; }
+
+  /* 列表 */
+  .li { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .li-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-top: 9px; flex-shrink: 0; }
+  .li p { font-size: 0.88rem; color: var(--ink2); font-weight: 300; line-height: 1.7; }
+
+  /* 金句框 */
+  .formula { background: #12100d; border-radius: 4px; padding: 28px 36px; margin-bottom: 20px; text-align: center; }
+  .formula p { font-family: 'Noto Serif SC', serif; font-size: clamp(1rem, 2vw, 1.4rem); color: #ede8de; line-height: 1.9; }
+  .formula em { color: var(--accent2); font-style: normal; }
+
+  /* 人物背景框 */
+  .context-box { background: var(--bg2); border-radius: 4px; padding: 20px 24px; margin: 14px 0; border-left: 2px solid var(--stone); }
+  .context-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--stone); margin-bottom: 6px; font-family: 'EB Garamond', serif; font-style: italic; }
+  .context-box p { font-size: 0.88rem; color: var(--ink2); font-weight: 300; line-height: 1.75; }
+
+  /* 总结格 */
+  .sum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .sg { background: var(--card); border-radius: 4px; padding: 18px 20px; display: flex; gap: 14px; }
+  .sg-n { font-family: 'EB Garamond', serif; font-size: 1.4rem; color: var(--accent); line-height: 1; flex-shrink: 0; width: 24px; }
+  .sg-t h3 { font-size: 0.88rem; margin-bottom: 4px; font-family: 'Noto Serif SC', serif; }
+  .sg-t p  { font-size: 0.82rem; color: var(--ink3); font-weight: 300; line-height: 1.65; }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { background: var(--bg2); border: 1px solid var(--line); border-radius: 2px; padding: 5px 12px; font-size: 0.8rem; color: var(--ink2); }
+  .tag.hl { background: var(--accent); color: #ede8de; border-color: var(--accent); }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+  footer { text-align: center; padding: 32px 0 0; font-size: 0.75rem; color: var(--ink3); border-top: 1px solid var(--line); margin-top: 64px; }
+
+  @media (max-width: 640px) {
+    .page { padding: 0 20px 80px; }
+    .cover { padding: 60px 20px; }
+    .toc-grid, .idea-pair, .twocol, .sum-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">马可·奥勒留 · 公元 170–180 年 · 写于征战途中</div>
+    <div class="cover-title">沉思录</div>
+    <div class="cover-latin">Τὰ εἰς ἑαυτόν ——写给自己的书</div>
+    <div class="cover-badge">V 2.0 · 中文整理版 · 全部来自原书</div>
+    <div class="cover-sub">
+      这本书从未打算出版。十二卷、数百条，没有章节标题，没有逻辑顺序。
+      他写下来是为了提醒自己——同一件事反复写，因为他反复忘记。
+      这不是哲学教科书，是一个人在挣扎。
+    </div>
+    <div class="cover-meta">
+      全部内容忠实于原书 · Gregory Hays 译本参考 · 按主题重新编排 ·
+      每条附有卷次出处，可对照原书查阅
+    </div>
+  </div>
+</div>
+
+<div class="page">
+<div class="reading-time">📖 建议讲解时间：60–75 分钟 · 共 9 个主题</div>
+
+<div class="intro-box">
+  <p><strong>他是谁？</strong>马可·奥勒留，罗马皇帝，公元 161 至 180 年在位，史称"五贤帝"最后一位。他统治着地球上最强大的帝国，同时要在北部边疆抵御日耳曼蛮族、应对帝国东部的帕提亚战争、面对毁灭性瘟疫（估计夺走帝国 5% 至 10% 人口）、处理宫廷叛乱、目睹多名子女早夭。</p>
+  <p><strong>这本书的背景是什么？</strong>大约在公元 170 至 180 年间，他在多瑙河前线的军营里，用希腊语写下了这些私人笔记。这是他的自我管理工具，不是给读者看的。所以他反复写同一件事——不是在总结，是在练习，就像每天做的精神体操。这本书的原名是「Ta eis heauton」，意思是"写给自己的"。</p>
+  <p><strong>为什么重新整理？</strong>原书十二卷无序，同一主题散布各处，大量重复。按主题提炼后，你会发现他其实在说九件事，但每一件都极深。</p>
+</div>
+
+<div class="toc">
+  <h3>九个主题</h3>
+  <div class="toc-grid">
+    <div class="toc-item"><span class="toc-num">01</span><span>控制二分法：只有一件事真正属于你</span></div>
+    <div class="toc-item"><span class="toc-num">02</span><span>此刻就够了：时间观与当下</span></div>
+    <div class="toc-item"><span class="toc-num">03</span><span>无常：万物皆逝，这是事实不是悲观</span></div>
+    <div class="toc-item"><span class="toc-num">04</span><span>死亡：自然的一部分，不是对立面</span></div>
+    <div class="toc-item"><span class="toc-num">05</span><span>理性：你内在的神性，你真正的自我</span></div>
+    <div class="toc-item"><span class="toc-num">06</span><span>对他人：宽容不是软弱，是逻辑推论</span></div>
+    <div class="toc-item"><span class="toc-num">07</span><span>名声与欲望：外物皆是虚空</span></div>
+    <div class="toc-item"><span class="toc-num">08</span><span>义务：此刻应做之事，就全力去做</span></div>
+    <div class="toc-item"><span class="toc-num">09</span><span>宇宙与整体：你是其中微小但真实的一部分</span></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     01 控制二分法
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">01</div>
+  <div class="section-title-wrap">
+    <div class="section-label">全书骨架 · 最高频主题</div>
+    <div class="section-title">控制二分法：只有一件事真正属于你</div>
+    <div class="section-note">核心段落：卷四第3条、卷八第7条、卷八第47条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">斯多葛哲学最根本的区分</div>
+  <h3>把世界分成两种：在你控制之内的，和不在你控制之内的</h3>
+  <p>这是整本《沉思录》的底层逻辑，也是斯多葛哲学最重要的贡献。世界上的事物分成两类：第一类在你的意志范围之内，包括你的判断、你的欲望、你的选择、你对事物的态度；第二类不在你的控制之内，包括外部事件、他人的行为、身体的健康、名誉的得失、命运的安排。</p>
+  <p>斯多葛哲学的建议是：把所有精力放在第一类，对第二类保持平静——不是消极放弃，而是不让第二类事物绑架你的内心状态。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">你对自己心智的掌控，是你唯一真正拥有的东西。外部事件不伤害你，伤害你的是你对它的判断。而判断，是你可以改变的。</div>
+    <div class="idea-ref">意译自 <em>卷四·3</em> 及 <em>卷八·47</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">把你无法控制的东西当作过客，就像旅人对待旅店：住一晚，然后离开，不要当成你的家。</div>
+    <div class="idea-ref">意译自 <em>卷四·3</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">把注意力限制在此刻。不要让对未来的焦虑扰乱现在；如果未来真的来临，你会用届时拥有的理性去面对它。</div>
+    <div class="idea-ref">意译自 <em>卷七·8</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">为什么他反复写这个</div>
+  <h3>他知道自己容易被外物牵着走，所以一遍遍提醒自己</h3>
+  <p>马可是罗马皇帝，每天处理来自帝国各地的问题，每天接触权力、荣耀、赞美和批评。这些都是"不在控制之内的事物"，但极难不被它们影响。所以他在书里数十次回到这个主题——不是因为他已经做到，而是因为他总在失败，总在拉回来。</p>
+  <p>这是《沉思录》最真实的地方：它不是一个已经掌握了真理的人写给别人的教诲，而是一个仍在挣扎的人每天给自己写的提醒清单。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">如果某件外部的事让你痛苦，痛苦不是来自那件事本身，而是来自你对它的判断。而改变判断，随时都可以做到。</div>
+    <div class="idea-ref">意译自 <em>卷八·47</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">第一条规则：保持内心不受干扰。第二条规则：直视事物，认清它们本来的样子。</div>
+    <div class="idea-ref">意译自 <em>卷八·7</em></div>
+  </div>
+</div>
+
+<div class="context-box">
+  <div class="context-label">斯多葛传承</div>
+  <p>控制二分法最早由爱比克泰德（Epictetus）系统阐述——马可在第一卷里提到他受益于爱比克泰德的著作。爱比克泰德本人是奴隶出身，他的学说从一开始就是为了回答：一个被剥夺了所有外部自由的人，如何仍然保持内心的尊严和自由？这个问题放在马可身上也成立，只是换了方向——他是拥有最多外部权力的人，却同样面对大量不在自己控制之内的事。</p>
+</div>
+
+
+<!-- ══════════════════════════════════
+     02 此刻就够了
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">02</div>
+  <div class="section-title-wrap">
+    <div class="section-label">时间观 · 全书最实用</div>
+    <div class="section-title">此刻就够了：活在当下不是逃避，是最大的清醒</div>
+    <div class="section-note">核心段落：卷二第14条、卷五第1条、卷九第31条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">马可的时间哲学</div>
+  <h3>过去无法改变，未来充满不确定，你真正能行动的只有此刻</h3>
+  <p>马可在书里反复强调把注意力限制在当下。这不是说不规划未来，而是说：不要让对未来的忧虑污染当下的行动力，不要让对过去的懊悔消耗当下的精力。</p>
+  <p>他有一个著名的时间观察：一个活了一百年的人和一个活了一天的人，在死亡时失去的是同一件东西——就是此刻。无论寿命长短，你所拥有的永远只是当下这一刻。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">寿命最长的人和寿命最短的人，死亡时失去的是同一件东西。他们拥有的，也只是此刻这一瞬——因为过去已不可夺回，未来尚未到来。</div>
+    <div class="idea-ref">意译自 <em>卷二·14</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">他每天清晨的练习——卷二第1条，全书最著名段落之一</div>
+  <h3>预设最坏情况，然后从容出发</h3>
+  <p>马可在第二卷第一条描述了他的晨间心理准备：他告诉自己，今天会遇到傲慢的、忘恩负义的、不讲理的、自私的、虚伪的人。他们如此是因为他们还没弄明白善恶的区别。但我已经看到了善的美丽和恶的丑陋，我知道做错事的人和我有同样的理性本质——我们都是整体的一部分，天生就是要合作的，就像手和脚、上下排牙齿。</p>
+  <p>所以没有任何人能伤害我，没有任何人能把丑陋强加给我，我也不能对他们愤怒——就像不能对一个不知道好坏的人真正生气一样。</p>
+  <p>这个练习的意义：他不是在做心理暗示说"今天会很美好"，而是提前接受了"今天会有困难"，因此当困难真的来临时，他已经准备好了，不会被打乱。这是斯多葛实践的精髓——预想最坏，然后内心自由。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">早上起床时告诉自己：我是为了作为人类应做的事情而起床的。</div>
+    <div class="idea-ref">意译自 <em>卷五·1</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">此刻的每一个行为都以正义完成，此刻的每一个念头都充满真实——这就够了。</div>
+    <div class="idea-ref">意译自 <em>卷九·31</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">不要沉浸在期待尚未到来的事物。数一数你已经拥有的，然后感激地想：如果我当初没有这些，我会多么渴望它们。</div>
+    <div class="idea-ref">意译自 <em>卷七·27</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">失去不过是改变，而改变是自然最喜爱的事。</div>
+    <div class="idea-ref">意译自 <em>卷九·35</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     03 无常
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">03</div>
+  <div class="section-title-wrap">
+    <div class="section-label">世界观 · 卷四最密集</div>
+    <div class="section-title">无常：万物皆逝，这是事实，不是悲观</div>
+    <div class="section-note">核心段落：卷四第43条、卷六第36条、卷七第49条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">马可的历史感——一个皇帝对权力的冷静审视</div>
+  <h3>凝视时间的尺度，眼前的得失就不再令人焦虑</h3>
+  <p>马可反复做一个思想实验：回望历史上曾经显赫的人，想象他们今天在哪里。那些伟大的哲学家呢？那些强大的帝王呢？他们都消失了，他们认为至关重要的事情也随之消失。</p>
+  <p>这不是让他陷入虚无——他的结论恰恰相反。既然一切终将消逝，那么眼前的荣辱得失就不那么令人焦虑了，当下该做的事就更值得全力去做，不被结果所绑架。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">时间是一条暴烈的河流。你刚瞥见某件事，它已被冲走；又有另一件漂过来，同样迅速消失。</div>
+    <div class="idea-ref">意译自 <em>卷四·43</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">亚洲和欧洲不过是宇宙的两个角落。整片海洋不过是一滴水。整座山脉不过是一粒尘土。现在这一刻，不过是永恒中的一个瞬间。一切都微小，易变，终将消逝。</div>
+    <div class="idea-ref">意译自 <em>卷六·36</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">回望过去，帝国兴替，一切皆有规律，循环往复。未来的模式也不会有什么不同，无法偏离此刻的节奏。</div>
+    <div class="idea-ref">意译自 <em>卷七·49</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">他最喜欢的思想实验</div>
+  <h3>那些伟大的人，他们去哪里了？</h3>
+  <p>马可在书里多次列举历史上的伟人名单——哲学家克律西波斯、苏格拉底、爱比克泰德，将领亚历山大大帝、凯撒、奥古斯都，皇帝维斯帕西安、图拉真、哈德良——然后问：他们在哪里？</p>
+  <p>这个练习不是在说"努力没有意义"，而是在说：你现在为名声、地位、别人的评价所焦虑的那些事，对比整个历史的尺度，实在太渺小了。真正重要的是此刻你做的事情的质量，而不是它是否能留名青史。</p>
+  <p>马可在书里引用过赫拉克利特的话：人类历史不过是孩子的把戏。他显然深受这个视角影响。但他没有因此变成虚无主义者——他照样尽责地处理每一封奏折、每一个战役决策、每一个法律案件，只是不再被结果的荣辱所扰动。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">多少个克律西波斯，多少个苏格拉底，多少个爱比克泰德，时间已经将他们吞噬。</div>
+    <div class="idea-ref">意译自 <em>卷七·19</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">自古以来，形形色色的事物都在循环重复。无论一个人活了一百年、两百年，还是无限长的时间，他所见到的都是同一件事。</div>
+    <div class="idea-ref">意译自 <em>卷二·14</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     04 死亡
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">04</div>
+  <div class="section-title-wrap">
+    <div class="section-label">最深刻的主题</div>
+    <div class="section-title">死亡：自然的一部分，不是你的对立面</div>
+    <div class="section-note">核心段落：卷二第11条、卷六第2条、卷九第3条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">斯多葛的死亡哲学</div>
+  <h3>不害怕死亡，不追求死亡，把它当作自然秩序的一部分接受</h3>
+  <p>马可在书里几十次谈到死亡。不是病态的迷恋，而是因为他认为：对死亡的清醒认识，是你能活得好的前提。如果你害怕死亡，你就会为保护你已有的东西而焦虑；如果你接受死亡是必然的，你就能更自由地活在当下，更全力地做当下的事，不被对失去的恐惧所束缚。</p>
+  <p>他有一句反复以不同方式出现的话：你可以随时离开生命——就让这个事实来决定你此刻做什么、说什么、想什么。不是说你应该追求死亡，而是说：死亡不可怕，所以不要为了逃避它而扭曲自己的生活。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">你随时可能离开生命。就让这个事实，来决定你现在做什么、说什么、想什么。</div>
+    <div class="idea-ref">意译自 <em>卷二·11</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">不要轻视死亡，而要欢迎它——因为自然如此意愿，一如其他万物。人的成熟、衰老、牙齿脱落、须发变白，都是自然的要求。死亡也是。一个明智的人对任何自然的事物都不急切也不冷漠。</div>
+    <div class="idea-ref">意译自 <em>卷六·2</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">死亡本身也是生命的行为之一。在那个行为中，同样把该做的事做好，就足够了。</div>
+    <div class="idea-ref">意译自 <em>卷六·2</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">平等化的死亡——他最喜欢的冥想</div>
+  <h3>亚历山大大帝和他的马夫，被死亡带到了同一个地方</h3>
+  <p>马可在书里有一个反复出现的意象：亚历山大大帝和他的马厩仆人，被死亡带到了同一个地方——要么都回归了宇宙的生成原则，要么都散作了原子。无论如何，结果是一样的。</p>
+  <p>这个思想的用意不是让人绝望，而是让人从地位、财富、权力的执迷中解脱出来。如果最后的结局都一样，那么你花大量精力去维护的那些差异，究竟有多重要？</p>
+  <p>马可自己身处权力顶端，这个思考对他的意义尤其切身：他每天在维护的那些皇权、地位、荣耀，终将和最普通人的命运殊途同归。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">亚历山大大帝和他的马夫，都被死亡带到了同一处——要么都重归宇宙的本源，要么都散作了微粒。</div>
+    <div class="idea-ref">意译自 <em>卷六·24</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">你已经上船，航行，抵达了港口。现在下船吧——如果是去另一种生命，那里同样有神存在；如果是去虚无，你也就不再受苦受乐，不再是一个比你所服侍的那个更低等的器皿的奴隶了。</div>
+    <div class="idea-ref">意译自 <em>卷三·3</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     05 理性
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">05</div>
+  <div class="section-title-wrap">
+    <div class="section-label">斯多葛神学 · 全书核心</div>
+    <div class="section-title">理性：你内在的神性，你最真实的自我</div>
+    <div class="section-note">核心段落：卷四第3条、卷五第16条、卷八第7条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">斯多葛宇宙观中的理性</div>
+  <h3>宇宙由理性（Logos）支配，人类共享这个理性——这是你最根本的身份</h3>
+  <p>斯多葛哲学认为，整个宇宙被一个理性原则（希腊语 Logos）所支配，这个原则渗透万物，使宇宙有序运转。人类的理性不是偶然产生的，而是这个宇宙理性在个体身上的表达。</p>
+  <p>这意味着：当你运用理性，你在与宇宙最深层的本质对齐；当你被情绪、欲望、偏见所控制，你在背离你最真实的自我。马可把内在的理性部分称为"统治性原则"（hegemonikon），并将其视为需要保护和培养的最核心的东西。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">你平常的思想是什么样的，你的心智就会变成什么样——因为灵魂是被思想染色的。就用这样的思想来染它：随时随处，人都可以活得好。</div>
+    <div class="idea-ref">意译自 <em>卷五·16</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">与自身和谐的人，与宇宙也和谐。</div>
+    <div class="idea-ref">意译自 <em>卷四·3</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">幸福的生活所需极少；它全在你自身之内，在你思考的方式里。</div>
+    <div class="idea-ref">意译自 <em>卷七·67</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">他的内省练习</div>
+  <h3>他每天检视自己的"统治性原则"是否被污染</h3>
+  <p>马可把人分成三个层次：身体（肉体）、灵魂（情绪和欲望的所在）、理性（统治性原则）。他的目标是让理性统治灵魂和身体，就像宇宙理性统治万物一样。</p>
+  <p>他在书里有一个持续的内省姿态：检查此刻的"统治性原则"是否受到了干扰——是否被恐惧污染了？是否被愤怒侵蚀了？是否被对赞美的渴望所扭曲了？他把这个检查视为最重要的日常维护工作，比处理任何外部事务都优先。</p>
+  <p>这个内省不是消极的自我批判，而是工程师检查精密仪器的态度——找到偏差，校准，继续。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">你的理性能力——对它要有尊重。这是一切保护你的东西，防止你接受虚假的印象——无论是对你自己本性的虚假印象，还是对一切理性存在的共同本性的虚假印象。</div>
+    <div class="idea-ref">意译自 <em>卷三·9</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">不要做任何违背自己意愿的事，不要说任何你内心认为不真实的话。就是这样。</div>
+    <div class="idea-ref">意译自 <em>卷十二·17</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     06 对他人
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">06</div>
+  <div class="section-title-wrap">
+    <div class="section-label">社会伦理 · 全书最动人</div>
+    <div class="section-title">对他人：宽容不是软弱，是理性的逻辑推论</div>
+    <div class="section-note">核心段落：卷二第1条、卷六第6条、卷十·30</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">为什么宽容是斯多葛逻辑的必然结论</div>
+  <h3>犯错的人是因为他们不知道更好的方式，而不是出于真正的恶意</h3>
+  <p>马可的宽容建立在一个哲学前提上：所有人都共享同一个理性本质，所有人都在尽其所能地生活。当一个人伤害了你或做了错事，不是因为他是坏人，而是因为他的理性出了问题——他没有分清什么是善，什么是恶。对这样的人，正确的反应不是愤怒，而是理解，甚至悲悯。就像你不会对一个病人愤怒，因为他生病了。</p>
+  <p>这种宽容不是软弱。马可在实际治理中并不软弱——他出征、判决、执法。但他在内心层面不允许愤怒和怨恨污染他的判断力。他要的是：清醒地行动，而不是在情绪驱动下行动。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">最好的复仇，是不要变成和伤害你的人一样的人。</div>
+    <div class="idea-ref">意译自 <em>卷六·6</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">每当你想要批评某人，先问自己：我自己有没有犯过与我准备批评的错误最接近的那种错？</div>
+    <div class="idea-ref">意译自 <em>卷十·30</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">有人冒犯了你？是他自己在冒犯自己。那和你有什么关系？</div>
+    <div class="idea-ref">意译自 <em>卷四·26</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">他的晨间练习——全书最著名段落（卷二第1条）的深层含义</div>
+  <h3>他不是在压制愤怒，而是在重构对人的理解</h3>
+  <p>第二卷第一条是整本书被引用最多的段落。他告诉自己：今天会遇到傲慢的、忘恩负义的、自私的、欺骗的、嫉妒的、脾气暴躁的人。他们如此，是因为他们还不明白善与恶的区别。</p>
+  <p>但是——他接着说——我已经看清了善的美丽和恶的丑陋。而且，做错事的人和我有同样的本质：不是同一血统，但有同样的理性，同样是神性的一部分。因此没有任何人能真正伤害我，没有任何人能把丑陋的东西强加给我，我也不能对他们愤恨——因为我们生来就是要合作的，就像双手、双脚、上下排牙齿。</p>
+  <p>关键句：<strong>"没有任何人能把丑陋的东西强加给我。"</strong> 这是控制二分法在人际关系中的应用——别人的行为是他们的事，我对此的反应是我的事，而只有我的反应才是我真正能控制的。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">接受命运为你安排的一切，爱与命运将你联结在一起的人——全心全意地爱。</div>
+    <div class="idea-ref">意译自 <em>卷六·39</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">我们生来就是要合作的，就像双脚、双手、眼睛，就像上下两排牙齿。互相妨碍是违反自然的。</div>
+    <div class="idea-ref">意译自 <em>卷二·1</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">愤怒和悲伤造成的伤害，远比引发它们的原因造成的伤害更大。</div>
+    <div class="idea-ref">意译自 <em>卷十一·18</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">无论任何人做了什么，说了什么，你都必须是好的——不是为了他们，而是为了你自己本性的缘故，就像黄金不会因为别人说它什么就停止发光。</div>
+    <div class="idea-ref">意译自 <em>卷五·15</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     07 名声与欲望
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">07</div>
+  <div class="section-title-wrap">
+    <div class="section-label">最反直觉的部分</div>
+    <div class="section-title">名声与欲望：外物皆是虚空，你会被遗忘</div>
+    <div class="section-note">核心段落：卷五第33条、卷七第21条、卷十二第22条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">一个皇帝写的最令人惊讶的话</div>
+  <h3>他拥有世界上最多的名声和权力，却在书里反复说它们毫无价值</h3>
+  <p>这是整本书最令人震撼的部分。马可·奥勒留是罗马皇帝，他的名字在帝国每个角落都是权威的象征，每天有人在颂扬他的功绩、感谢他的恩典。但他在这本私人日记里，反复提醒自己：名声是短暂的，赞美是空洞的，所有这些在时间面前都会消失。</p>
+  <p>这不是表演出来的谦逊。书里有很多地方能看出他真实的心理挣扎——他渴望被认可，渴望被理解，渴望自己的努力被看见。然后他用斯多葛的原则把这种渴望压下去，提醒自己这些都是"外物"，真正重要的只有此刻内在的品质。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">不久之后你将遗忘一切，不久之后一切也将遗忘你。</div>
+    <div class="idea-ref">意译自 <em>卷七·21</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">再过一小段时间，你就是灰烬或白骨，你的名字或对名字的记忆什么都不是了。</div>
+    <div class="idea-ref">意译自 <em>卷五·33</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">一切都是判断，而判断在你的掌控之中。当你意识到这一点，就像水手绕过了岬角，你会发现平静，一片无浪的海湾。</div>
+    <div class="idea-ref">意译自 <em>卷十二·22</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">他对赞美的真实态度——卷六第16条</div>
+  <h3>被快乐或名声所主导的人，无法拥有幸福的生活</h3>
+  <p>马可在书里明确说：被快乐所驱动的人，行为像动物；被名声所驱动的人，行为被人群主导。他认为这两种人都失去了内在的自主性——他们的行动不是出于自己理性的判断，而是出于外部刺激的驱动。</p>
+  <p>他对"被人记住"这件事特别警惕。书里有几处他问自己：你花这么大力气想被记住，那些记住你的人，百年后也会消失。那些记住他们的人，同样消失。记忆的链条总有尽头，而且很短。</p>
+  <p>对一个皇帝来说，这是非常困难的练习——皇帝的工作本身就是要在历史上留下痕迹。马可反复在做的是：把工作本身的质量和工作的历史评价分开。前者是他能控制的，后者不是。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">不要花时间去想象你没有的东西，而是数清你已经拥有的，然后想：如果这些东西我当初没有，我会多么渴望它们？</div>
+    <div class="idea-ref">意译自 <em>卷七·27</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">如果快乐可以带来幸福，那些臭名昭著的强盗、奸邪的人和暴君，为何也能大量享受快乐？</div>
+    <div class="idea-ref">意译自 <em>卷六·34（隐含）</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     08 义务
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">08</div>
+  <div class="section-title-wrap">
+    <div class="section-label">实践斯多葛 · 全书行动核心</div>
+    <div class="section-title">义务：此刻应做之事，就全力去做</div>
+    <div class="section-note">核心段落：卷二第5条、卷四第17条、卷十二第23条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">哲学不是谈论，是行动</div>
+  <h3>思想要转化为行动，哲学要落到当下的任务上</h3>
+  <p>马可在书里对空谈哲学的人有明显的不耐烦。他认为哲学的目的是让人活得更好、做得更好，而不是让人更善于谈论哲学。他最鄙视的是那种嘴上说着斯多葛原则，行动上却依然被情绪和欲望控制的人。</p>
+  <p>他的实践原则很简单：此刻有什么该做的事？做。此刻没有什么该做的事？别折腾。每一个行动都做到最好，然后放手——不执着于结果，不忧虑他人的评价，只关注行动本身的质量。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">把每一个行动都当作此生最后一个行动来做——摆脱所有漫无目的的目标，摆脱所有会让你偏离理性之路的情感，摆脱一切伪装、自爱和对命运安排的抱怨。</div>
+    <div class="idea-ref">意译自 <em>卷二·5</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">不要假装你还有一万年可活。死亡悬于头顶。趁还活着，趁还可能，让自己变好。</div>
+    <div class="idea-ref">意译自 <em>卷四·17</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">把自己限制在此刻：此刻的行动是否出于义务？如果是，就去做。如果不是，就算了。</div>
+    <div class="idea-ref">意译自 <em>卷十二·23</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">他对懒惰的自我批评——卷五第1条</div>
+  <h3>早上不想起床，他是这样说服自己的</h3>
+  <p>第五卷第一条写的是一个生动的场景：他躺在床上，不想起来，和自己争论。然后他问自己：起床去做人类应做的事，和继续窝在被子里享受温暖，哪个更符合你的本性？</p>
+  <p>他的回答是：起床去做人类应做的事。不是因为这很愉快——他明确说了这不愉快。而是因为这是他的职责，这是他作为一个理性存在应有的行为方式。蚂蚁做蚂蚁的事，蜜蜂做蜜蜂的事，人类做人类的事——不是强迫，而是顺应本性。</p>
+  <p>这个段落很重要，因为它告诉我们：马可不是一个天生热爱早起、天生充满动力的人。他和我们一样懒，只是他有一套说服自己的方式，而且他把这个过程写下来了。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">此刻的行动，会在永恒中回响。</div>
+    <div class="idea-ref">意译自 <em>卷六·44</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">如果它不是正确的，不要做；如果它不是真实的，不要说。你的冲动应该在你的掌控之内。</div>
+    <div class="idea-ref">意译自 <em>卷十二·17</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     09 宇宙与整体
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">09</div>
+  <div class="section-title-wrap">
+    <div class="section-label">宏观视角 · 最后归宿</div>
+    <div class="section-title">宇宙与整体：你是其中微小但真实的一部分</div>
+    <div class="section-note">核心段落：卷四第3条、卷六第54条、卷七第9条</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">斯多葛宇宙观的实践含义</div>
+  <h3>从宇宙尺度看，你的苦难是微小的——但你的行动仍有意义</h3>
+  <p>马可有一个习惯：当遇到烦恼时，他把视角拉到最远处——宇宙的尺度、历史的长度、人类文明的渺小——然后从那个视角看眼前的问题。在这个尺度上，几乎所有烦恼都会缩小。</p>
+  <p>但他同时坚持：这个宏观视角不是虚无主义，不是说"一切都不重要所以我什么都不管了"。恰恰相反——因为我是整体的一部分，我的每一个行动都对整体有贡献，我更应该好好做当下的事，不被个人得失所干扰。</p>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">宇宙是变化；生命是由思想构成的。</div>
+    <div class="idea-ref">意译自 <em>卷四·3</em></div>
+  </div>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">对蜂群不好的，对单只蜜蜂也不好。</div>
+    <div class="idea-ref">意译自 <em>卷六·54</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">整个宇宙只有一个，穿透一切的神只有一个，物质只有一种，法则只有一条，一切理性存在共享的理性只有一个，真理也只有一个。</div>
+    <div class="idea-ref">意译自 <em>卷七·9</em></div>
+  </div>
+</div>
+
+<div class="insight">
+  <div class="insight-label">他的宏观视角练习——卷三第11条及多处</div>
+  <h3>他教自己用三种不同的尺度看同一件事</h3>
+  <p>马可在书里展示了一种反复使用的认知工具：对任何令他烦恼或诱惑的事物，他会从三个尺度去看。</p>
+  <p><strong>物理尺度</strong>：这件东西在物质层面是什么？一顿精美的宴席，拆解开来，不过是动物的尸体和植物的汁液。紫色的权贵礼袍，不过是贝壳的分泌物染成的羊毛。这个练习不是为了让一切变得恶心，而是为了剥去附着在事物上的社会意义，看清其物质本质。</p>
+  <p><strong>时间尺度</strong>：这件事再过一百年还有人在意吗？两百年后还有人知道吗？他反复提到历史上那些以为自己很重要的人如今都被遗忘了。</p>
+  <p><strong>宇宙尺度</strong>：在无限的时间和空间面前，罗马帝国不过是一个小点。整个人类历史不过是宇宙史的一瞬。</p>
+  <p>这三个尺度组合在一起，能让几乎任何烦恼都相形见绌。</p>
+</div>
+
+<div class="idea-pair">
+  <div class="idea-card">
+    <div class="idea-text">不要让自己的思想在生命的整体上游荡，不要在心中列举出所有可能到来的麻烦。专注于现在。</div>
+    <div class="idea-ref">意译自 <em>卷八·36</em></div>
+  </div>
+  <div class="idea-card">
+    <div class="idea-text">观察自然如何通过改变来运作，永远喜爱改变现有的事物，用同样的材料创造新的东西。</div>
+    <div class="idea-ref">意译自 <em>卷四·36</em></div>
+  </div>
+</div>
+
+<div class="idea-single">
+  <div class="idea-card">
+    <div class="idea-text">一个人的生命不过是一瞬，他的存在是流动的，他的感知是朦胧的，他身体的组成是腐朽的，他的灵魂是漩涡，他的命运是难以预料的，他的名声是虚无的。简言之：身体的一切如河流，灵魂的一切如梦与烟。生命是一场战争，是异乡的短暂旅居；死后的名声不过是被遗忘。</div>
+    <div class="idea-ref">意译自 <em>卷二·17</em></div>
+  </div>
+</div>
+
+
+<!-- ══════════════════════════════════
+     总结
+═══════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">✦</div>
+  <div class="section-title-wrap">
+    <div class="section-label">总结</div>
+    <div class="section-title">他在书里说了什么，以及为什么值得读</div>
+  </div>
+</div>
+
+<div class="block">
+  <h3>这本书不是答案，是一个人挣扎的记录</h3>
+  <p>马可·奥勒留写这本书，是因为他知道自己容易忘记这些原则。他容易被名声诱惑，容易被愤怒控制，容易因为别人的批评而受伤，容易对朝臣的奉承感到满意。这些他在书里都承认了。</p>
+  <p>他每天写，是为了把这些原则练习到成为反射——就像斯多葛传统中的"精神操练"，就像重复一段音乐直到手指不需要思考就能弹出来。</p>
+  <p>这本书两千年来一直被读，不是因为马可做到了他所写的一切，而是因为他写的东西如此真实——一个拥有最多权力的人，仍然每天在和自己的软弱搏斗，仍然每天在提醒自己最基本的人生道理。这种真实，跨越了两千年。</p>
+</div>
+
+<div class="sum-grid">
+  <div class="sg">
+    <div class="sg-n">1</div>
+    <div class="sg-t"><h3>控制你能控制的，放下其余的</h3><p>判断、意志、反应是你的；外部事件、他人行为、命运不是你的。把精力放在前者，对后者保持平静。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">2</div>
+    <div class="sg-t"><h3>活在此刻，把每天当作完整的一生</h3><p>过去无法改变，未来不可知，此刻才是行动的时间单位。晨起预设困难，夜晚检视行动。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">3</div>
+    <div class="sg-t"><h3>万物皆逝，包括你的苦难和你的荣耀</h3><p>无常不是悲观的理由，是从容的来源。凝视历史的长度，眼前的得失就不再那么令人焦虑。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">4</div>
+    <div class="sg-t"><h3>死亡是自然的，提前接受它让你更自由</h3><p>对死亡的清醒认识，是活得好的前提。不要为了逃避失去而扭曲你的生活。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">5</div>
+    <div class="sg-t"><h3>保护你内在的理性，这是你真正的自我</h3><p>不管外部发生什么，不让内心的理性被情绪、欲望、他人评价所污染。每天检视，及时校准。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">6</div>
+    <div class="sg-t"><h3>对他人宽容，因为他们也在尽力而为</h3><p>犯错的人是因为他们不知道更好的方式。宽容不是软弱，是理性推论出的必然结论。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">7</div>
+    <div class="sg-t"><h3>名声和财富是外物，不要把自我绑在它们上面</h3><p>你会被遗忘，这是事实。但这让你更自由，而不是更绝望——真正重要的是此刻你行动的质量。</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">8</div>
+    <div class="sg-t"><h3>此刻该做的事，全力去做</h3><p>哲学的目的是行动。眼前的职责，用尽全力，有尊严地完成，然后放手，不执着于结果。</p></div>
+  </div>
+</div>
+
+<div class="formula">
+  <p>
+    你拥有的最重要的东西，<br>
+    是对自己心智的掌控。<br><br>
+    <em>外部事件不伤害你，<br>
+    你对它的判断才伤害你。<br>
+    而判断，随时可以改变。</em>
+  </p>
+</div>
+
+<div class="tags">
+  <span class="tag hl">控制二分法</span>
+  <span class="tag">活在此刻</span>
+  <span class="tag hl">无常</span>
+  <span class="tag">死亡是自然的</span>
+  <span class="tag hl">内在理性（Logos）</span>
+  <span class="tag">宽容他人</span>
+  <span class="tag hl">名声是虚空</span>
+  <span class="tag">义务与行动</span>
+  <span class="tag hl">宇宙视角</span>
+  <span class="tag">精神操练</span>
+  <span class="tag">写于军营 · 公元 170–180</span>
+  <span class="tag hl">斯多葛主义实践</span>
+</div>
+
+<hr>
+
+<div style="background:var(--bg2); border-radius:4px; padding:24px 28px; margin-top:20px;">
+  <p style="font-size:0.85rem; color:var(--ink3); margin-bottom:10px;">如何深入阅读</p>
+  <p style="font-size:0.88rem; color:var(--ink2); line-height:2.1;">
+    <strong>推荐译本</strong>：中文首选何怀宏译本（商务印书馆）；英文首选 Gregory Hays 2002年现代图书馆版，是近二十年最权威的英译，语言流畅，有详细导言。<br>
+    <strong>阅读方式</strong>：不要从头读到尾。随手翻开任何一页，读几条，合上，想一想。这本书的结构本来就是碎片化的，因为马可本来就是这么写的。<br>
+    <strong>配合阅读</strong>：爱比克泰德的《语录》（Discourses）是马可思想最重要的来源；塞内卡的《论生命之短暂》（On the Shortness of Life）与沉思录高度互补，可以对照着读。<br>
+    <strong>原文网站</strong>：vreeman.com/meditations 有 Gregory Hays 译本全文免费阅读，按卷次和条目编号，可对照本稿出处查阅原文。
+  </p>
+</div>
+
+<footer>
+  Designed by 葱头爸爸 · liamphoenixwayne@outlook.com
+</footer>
+
+</div>
+</body>
+</html>

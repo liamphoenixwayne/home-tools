@@ -1,0 +1,628 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>巴菲特之道 · 讲课稿</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@300;400;600;700&family=Noto+Sans+SC:wght@300;400;500&family=EB+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+  :root {
+    --bg:      #f3f0e8;
+    --bg2:     #e9e4d4;
+    --card:    #ffffff;
+    --ink:     #1a1510;
+    --ink2:    #4a4030;
+    --ink3:    #7a7060;
+    --accent:  #6b4c10;
+    --accent2: #c4963a;
+    --line:    #d8d0bc;
+    --green:   #2e6e3a;
+    --red:     #8b2020;
+    --blue:    #1e4080;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans SC', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.8;
+  }
+
+  .cover {
+    background: #141008;
+    padding: 80px 40px;
+    margin-bottom: 64px;
+  }
+  .cover-inner { max-width: 900px; margin: 0 auto; }
+  .cover-eyebrow {
+    font-family: 'EB Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: #4a3e28;
+    letter-spacing: 0.08em;
+    margin-bottom: 20px;
+  }
+  .cover-title {
+    font-family: 'Noto Serif SC', serif;
+    font-size: clamp(2.5rem, 5.5vw, 4.2rem);
+    font-weight: 700;
+    color: #f0e8d0;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+  .cover-author {
+    font-family: 'EB Garamond', serif;
+    font-size: 1rem;
+    color: #6a5c3a;
+    margin-bottom: 32px;
+  }
+  .cover-badge {
+    display: inline-block;
+    background: var(--accent);
+    color: #f0e8d0;
+    font-size: 0.72rem;
+    padding: 3px 12px;
+    border-radius: 2px;
+    letter-spacing: 0.06em;
+    margin-bottom: 16px;
+  }
+  .cover-sub {
+    font-size: 0.95rem;
+    color: #4a3e28;
+    font-weight: 300;
+    margin-bottom: 48px;
+    line-height: 1.7;
+  }
+  .cover-meta {
+    font-size: 0.82rem;
+    color: #332a18;
+    border-top: 1px solid #221a08;
+    padding-top: 18px;
+  }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 0 40px 100px; }
+
+  .reading-time {
+    display: inline-block;
+    background: var(--bg2);
+    border: 1px solid var(--line);
+    padding: 6px 16px;
+    border-radius: 2px;
+    font-size: 0.8rem;
+    color: var(--ink3);
+    margin-bottom: 16px;
+  }
+
+  .intro-box {
+    background: var(--card);
+    border-left: 3px solid var(--accent2);
+    border-radius: 0 4px 4px 0;
+    padding: 24px 28px;
+    margin-bottom: 48px;
+  }
+  .intro-box p { font-size: 0.92rem; color: var(--ink2); font-weight: 300; line-height: 1.85; }
+  .intro-box p + p { margin-top: 10px; }
+
+  /* TOC */
+  .toc { background: var(--card); border-radius: 4px; padding: 28px 32px; margin-bottom: 48px; border-left: 3px solid var(--accent); }
+  .toc h3 { font-family: 'Noto Serif SC', serif; font-size: 0.9rem; margin-bottom: 16px; color: var(--ink3); text-transform: uppercase; letter-spacing: 0.1em; }
+  .toc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px 24px; }
+  .toc-item { font-size: 0.84rem; color: var(--ink2); display: flex; gap: 12px; align-items: baseline; }
+  .toc-num { font-family: 'EB Garamond', serif; color: var(--accent); flex-shrink: 0; width: 20px; }
+
+  /* SECTION */
+  .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin: 72px 0 32px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--ink);
+  }
+  .section-num { font-family: 'EB Garamond', serif; font-size: 3rem; color: var(--line); line-height: 1; flex-shrink: 0; }
+  .section-label { font-size: 0.75rem; color: var(--accent); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 4px; font-family: 'EB Garamond', serif; font-style: italic; }
+  .section-title { font-family: 'Noto Serif SC', serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; color: var(--ink); line-height: 1.2; }
+  .section-note { font-size: 0.78rem; color: var(--ink3); margin-top: 4px; }
+
+  /* BLOCKS */
+  .block { background: var(--card); border-radius: 4px; padding: 32px 36px; margin-bottom: 20px; }
+  .block-label { font-family: 'EB Garamond', serif; font-style: italic; font-size: 0.85rem; color: var(--accent); letter-spacing: 0.06em; margin-bottom: 12px; }
+  .block h3 { font-family: 'Noto Serif SC', serif; font-size: 1.1rem; font-weight: 600; margin-bottom: 14px; color: var(--ink); }
+  .block p { font-size: 0.95rem; color: var(--ink2); font-weight: 300; line-height: 1.85; }
+  .block p + p { margin-top: 12px; }
+
+  /* QUOTE */
+  .quote { border-left: 3px solid var(--accent); background: var(--bg2); padding: 18px 24px; border-radius: 0 4px 4px 0; margin-bottom: 20px; }
+  .quote p { font-family: 'Noto Serif SC', serif; font-size: 0.98rem; font-style: italic; color: var(--ink); font-weight: 400; line-height: 1.8; }
+  .quote cite { display: block; margin-top: 8px; font-size: 0.78rem; color: var(--ink3); font-style: normal; font-family: 'Noto Sans SC', sans-serif; }
+
+  /* FORMULA */
+  .formula { background: #141008; border-radius: 4px; padding: 28px 36px; margin-bottom: 20px; text-align: center; }
+  .formula p { font-family: 'EB Garamond', serif; font-size: clamp(1.1rem, 2.2vw, 1.6rem); color: #f0e8d0; line-height: 1.7; }
+  .formula em { color: var(--accent2); font-style: normal; }
+
+  /* TENET CARDS — four groups */
+  .tenet-group { margin-bottom: 20px; }
+  .tenet-group-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+  }
+  .tenet-group-badge {
+    display: inline-block;
+    padding: 4px 14px;
+    border-radius: 2px;
+    font-size: 0.78rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    color: white;
+  }
+  .badge-business { background: var(--accent); }
+  .badge-mgmt     { background: var(--blue); }
+  .badge-finance  { background: var(--green); }
+  .badge-value    { background: #7a3a20; }
+
+  .tenet-count { font-family: 'EB Garamond', serif; font-size: 0.85rem; color: var(--ink3); }
+
+  .tenet-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+  .tenet-card { background: var(--card); border-radius: 4px; padding: 22px 24px; }
+  .tenet-card.business { border-top: 3px solid var(--accent); }
+  .tenet-card.mgmt     { border-top: 3px solid var(--blue); }
+  .tenet-card.finance  { border-top: 3px solid var(--green); }
+  .tenet-card.value    { border-top: 3px solid #7a3a20; }
+
+  .tenet-num { font-family: 'EB Garamond', serif; font-size: 1.1rem; color: var(--ink3); margin-bottom: 4px; }
+  .tenet-card h3 { font-family: 'Noto Serif SC', serif; font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: var(--ink); }
+  .tenet-card p { font-size: 0.84rem; color: var(--ink3); font-weight: 300; line-height: 1.7; }
+
+  /* TWO COL */
+  .twocol { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
+  .col-block { background: var(--card); border-radius: 4px; padding: 24px 22px; }
+  .col-block.bad  { border-top: 3px solid var(--red); }
+  .col-block.good { border-top: 3px solid var(--green); }
+  .col-block h3 { font-family: 'Noto Serif SC', serif; font-size: 0.95rem; margin-bottom: 14px; }
+
+  /* LIST */
+  .li { display: flex; gap: 12px; margin-bottom: 12px; align-items: flex-start; }
+  .li-dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); margin-top: 9px; flex-shrink: 0; }
+  .li p { font-size: 0.88rem; color: var(--ink2); font-weight: 300; line-height: 1.7; }
+
+  /* EXAMPLE */
+  .example { background: var(--bg2); border-radius: 4px; padding: 20px 24px; margin: 14px 0; border-left: 2px solid var(--accent2); }
+  .example-label { font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent2); margin-bottom: 6px; font-family: 'EB Garamond', serif; font-style: italic; }
+  .example p { font-size: 0.88rem; color: var(--ink2); font-weight: 300; line-height: 1.75; }
+
+  /* COMPARE TABLE */
+  .compare { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 0.88rem; }
+  .compare th { background: #141008; color: #f0e8d0; padding: 12px 16px; text-align: left; font-family: 'Noto Serif SC', serif; font-weight: 600; font-size: 0.85rem; }
+  .compare td { padding: 11px 16px; border-bottom: 1px solid var(--line); color: var(--ink2); font-weight: 300; vertical-align: top; }
+  .compare tr:nth-child(even) td { background: var(--bg2); }
+  .compare td:first-child { font-weight: 500; color: var(--ink); }
+
+  /* THREE TEACHERS */
+  .teacher-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 20px; }
+  .teacher-card { background: var(--card); border-radius: 4px; padding: 24px 20px; border-top: 3px solid var(--accent2); }
+  .teacher-name { font-family: 'Noto Serif SC', serif; font-size: 1rem; font-weight: 700; margin-bottom: 4px; color: var(--ink); }
+  .teacher-role { font-size: 0.76rem; color: var(--ink3); font-style: italic; margin-bottom: 12px; }
+  .teacher-card p { font-size: 0.84rem; color: var(--ink2); font-weight: 300; line-height: 1.7; }
+
+  /* SUM GRID */
+  .sum-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .sg { background: var(--card); border-radius: 4px; padding: 18px 20px; display: flex; gap: 14px; }
+  .sg-n { font-family: 'EB Garamond', serif; font-size: 1.4rem; color: var(--accent); line-height: 1; flex-shrink: 0; width: 24px; }
+  .sg-t h3 { font-size: 0.88rem; margin-bottom: 4px; font-family: 'Noto Serif SC', serif; }
+  .sg-t p  { font-size: 0.82rem; color: var(--ink3); font-weight: 300; line-height: 1.65; }
+
+  /* TAGS */
+  .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+  .tag { background: var(--bg2); border: 1px solid var(--line); border-radius: 2px; padding: 5px 12px; font-size: 0.8rem; color: var(--ink2); }
+  .tag.hl { background: var(--accent); color: white; border-color: var(--accent); }
+
+  hr { border: none; border-top: 1px solid var(--line); margin: 40px 0; }
+  footer { text-align: center; padding: 32px 0 0; font-size: 0.75rem; color: var(--ink3); border-top: 1px solid var(--line); margin-top: 64px; }
+
+  @media (max-width: 640px) {
+    .page { padding: 0 20px 80px; }
+    .cover { padding: 60px 20px; }
+    .toc-grid, .twocol, .tenet-grid, .teacher-grid, .sum-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <div class="cover-inner">
+    <div class="cover-eyebrow">Robert G. Hagstrom · 1994 初版 · 2013 第三版</div>
+    <div class="cover-title">巴菲特之道</div>
+    <div class="cover-author">The Warren Buffett Way</div>
+    <div class="cover-badge">原书内容整理 · 讲课稿</div>
+    <div class="cover-sub">
+      Hagstrom 用二十年时间研究巴菲特的每一封股东信、每一次访谈、每一个投资决策，<br>
+      将散落各处的思想提炼成一套完整的体系——12条原则，4个维度。
+    </div>
+    <div class="cover-meta">约 50 分钟讲解 · 内容来自原书 · 按教学逻辑编排</div>
+  </div>
+</div>
+
+<div class="page">
+<div class="reading-time">📖 建议讲解时间：50 分钟</div>
+
+<div class="intro-box">
+  <p><strong>这本书解决了什么问题？</strong>巴菲特的投资思想散落在六十年的致股东信、访谈、演讲里，没有结构，没有系统。Hagstrom做的事情是：把这些碎片按主题分类，提炼成可以被学习和复用的框架。1994年第一版卖出了120万册，是公认最权威的巴菲特投资方法整理。</p>
+  <p><strong>和致股东信有什么不同？</strong>致股东信是叙事，这本书是提炼。前者你要自己挖，后者已经帮你挖好了，按企业分析、管理层评估、财务指标、估值四个维度，每个维度3条原则，共12条，每条都有伯克希尔的真实案例支撑。</p>
+</div>
+
+<!-- TOC -->
+<div class="toc">
+  <h3>目录</h3>
+  <div class="toc-grid">
+    <div class="toc-item"><span class="toc-num">01</span><span>巴菲特的三位老师</span></div>
+    <div class="toc-item"><span class="toc-num">02</span><span>12条原则总览</span></div>
+    <div class="toc-item"><span class="toc-num">03</span><span>企业原则（3条）</span></div>
+    <div class="toc-item"><span class="toc-num">04</span><span>管理层原则（3条）</span></div>
+    <div class="toc-item"><span class="toc-num">05</span><span>财务原则（4条）</span></div>
+    <div class="toc-item"><span class="toc-num">06</span><span>估值原则（2条）</span></div>
+    <div class="toc-item"><span class="toc-num">07</span><span>集中持仓：颠覆分散化神话</span></div>
+    <div class="toc-item"><span class="toc-num">08</span><span>投资心理学：最大的敌人是自己</span></div>
+    <div class="toc-item"><span class="toc-num">09</span><span>可口可乐案例：12条原则的实战应用</span></div>
+    <div class="toc-item"><span class="toc-num">10</span><span>总结</span></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     01 三位老师
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">01</div>
+  <div class="section-title-wrap">
+    <div class="section-label">背景 · 第2章</div>
+    <div class="section-title">三位老师：塑造巴菲特的思想来源</div>
+  </div>
+</div>
+
+<div class="block">
+  <p>Hagstrom 在第2章系统梳理了巴菲特思想的三个来源。理解这三个人，才能理解12条原则背后的逻辑。</p>
+</div>
+
+<div class="teacher-grid">
+  <div class="teacher-card">
+    <div class="teacher-name">本杰明·格雷厄姆</div>
+    <div class="teacher-role">哥伦比亚大学导师 · 价值投资之父</div>
+    <p>给了巴菲特<strong>量化分析的框架</strong>：以低于内在价值的价格买入，依赖安全边际。格雷厄姆教他把股票当成企业的一部分，而不是价格波动的筹码。巴菲特早期完全是格雷厄姆风格——只看有形资产，买便宜货。</p>
+  </div>
+  <div class="teacher-card">
+    <div class="teacher-name">菲利普·费雪</div>
+    <div class="teacher-role">《怎样选择成长股》作者</div>
+    <p>给了巴菲特<strong>定性分析的框架</strong>：关注企业的管理层质量、成长潜力、竞争地位这些"软性"指标。费雪认为，真正伟大的企业可以无限期持有，不需要频繁买卖。这改变了巴菲特"便宜货主义"的早期风格。</p>
+  </div>
+  <div class="teacher-card">
+    <div class="teacher-name">查理·芒格</div>
+    <div class="teacher-role">伯克希尔副董事长 · 长期合伙人</div>
+    <p>完成了最关键的改造：<strong>用合理价格买优秀企业，远胜于用便宜价格买平庸企业</strong>。芒格说服巴菲特为无形资产（品牌、护城河）支付溢价，See's糖果是转折点——巴菲特此后再也不是纯粹的格雷厄姆信徒了。</p>
+  </div>
+</div>
+
+<div class="block">
+  <p>Hagstrom 的核心观点：巴菲特是格雷厄姆的数量框架（安全边际、内在价值）+ 费雪的质量框架（管理层、成长）+ 芒格的哲学升华（为好企业付合理价格）的融合体。这三个来源缺一不可，理解了来源，12条原则就不再是死记硬背的清单，而是有机的整体。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     02 12条总览
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">02</div>
+  <div class="section-title-wrap">
+    <div class="section-label">框架总览 · 第1章</div>
+    <div class="section-title">12条原则：四个维度的完整筛选体系</div>
+  </div>
+</div>
+
+<div class="block">
+  <p>Hagstrom 把巴菲特的选股逻辑提炼成12条原则，分四个维度：企业本身（3条）、管理层（3条）、财务（4条）、估值（2条）。这12条是一个<strong>筛选漏斗</strong>——不是清单，而是从上到下逐步淘汰的过程。通不过企业原则的，管理层原则就不用看了；通不过财务原则的，估值就不用算了。</p>
+  <p>重要提示：Hagstrom 在书里说，并非每一笔投资都完全符合所有12条原则，但作为一个整体，这12条构成了巴菲特投资体系的核心。</p>
+</div>
+
+<!-- 12条卡片 -->
+<div class="tenet-group">
+  <div class="tenet-group-header">
+    <span class="tenet-group-badge badge-business">企业原则</span>
+    <span class="tenet-count">第1-3条 · 评估企业本身</span>
+  </div>
+  <div class="tenet-grid">
+    <div class="tenet-card business">
+      <div class="tenet-num">原则 1</div>
+      <h3>简单易懂</h3>
+      <p>只投资你真正理解的企业——在你的"能力圈"内。圆圈大小不重要，重要的是清楚地知道边界在哪里。理解一家企业意味着：能准确解读它的发展动态和前景，知道什么是威胁、什么是机会。</p>
+    </div>
+    <div class="tenet-card business">
+      <div class="tenet-num">原则 2</div>
+      <h3>稳定的经营历史</h3>
+      <p>持续稳定的经营记录是可靠的信号。避免正在经历重大变革的企业（重组、转型）——业务变化越大，判断失误的概率越高。正在解决重大问题的企业同样要回避，因为"困境反转"极少成功。</p>
+    </div>
+    <div class="tenet-card business">
+      <div class="tenet-num">原则 3</div>
+      <h3>良好的长期前景</h3>
+      <p>巴菲特定义的"特许经营权"（Franchise）：产品/服务被大量需要、没有近似替代品、不受价格管制。这三个特征共同创造了护城河。护城河必须宽而持久——"投资的关键是确定竞争优势，以及这种优势的持续性。"</p>
+    </div>
+  </div>
+</div>
+
+<div class="tenet-group">
+  <div class="tenet-group-header">
+    <span class="tenet-group-badge badge-mgmt">管理层原则</span>
+    <span class="tenet-count">第4-6条 · 评估管理团队</span>
+  </div>
+  <div class="tenet-grid">
+    <div class="tenet-card mgmt">
+      <div class="tenet-num">原则 4</div>
+      <h3>管理层是否理性</h3>
+      <p>资本配置是管理层最重要的工作。当企业产生超出再投资需求的现金时，管理层有两个选择：继续投资（如果回报率高于资本成本）或者把钱还给股东（分红、回购）。选错方向的管理层在摧毁价值，即使企业本身很好。</p>
+    </div>
+    <div class="tenet-card mgmt">
+      <div class="tenet-num">原则 5</div>
+      <h3>对股东坦诚</h3>
+      <p>好的管理层应该超越GAAP要求，向股东提供真实理解企业所需的信息：企业大约价值多少？未来履行义务的可能性如何？管理层的表现如何？最重要的是：好的管理层会公开承认错误，而不是用借口掩盖。</p>
+    </div>
+    <div class="tenet-card mgmt">
+      <div class="tenet-num">原则 6</div>
+      <h3>抵制机构惰性</h3>
+      <p>"机构惰性"（Institutional Imperative）是指管理层盲目跟随同行的倾向，不管那样做是否理性。明知道同行在错误的方向上，但因为"大家都这样做"就跟风。能够抵制这种惰性、独立思考的管理层极为罕见，也极为宝贵。</p>
+    </div>
+  </div>
+</div>
+
+<div class="tenet-group">
+  <div class="tenet-group-header">
+    <span class="tenet-group-badge badge-finance">财务原则</span>
+    <span class="tenet-count">第7-10条 · 评估财务质量</span>
+  </div>
+  <div class="tenet-grid">
+    <div class="tenet-card finance">
+      <div class="tenet-num">原则 7</div>
+      <h3>关注股本回报率，而非每股盈利</h3>
+      <p>每股盈利创新高没有意义——因为每年留存的收益自然会增加权益基础，哪怕管理层什么都没做，EPS也会上涨。真正有意义的是股本回报率（ROE）：用同样多的权益资本，产生了多少利润？计算时注意：权益要用历史成本，剔除资本利得等一次性项目，同时关注杠杆水平。</p>
+    </div>
+    <div class="tenet-card finance">
+      <div class="tenet-num">原则 8</div>
+      <h3>计算所有者收益</h3>
+      <p>现金流分析遗漏了资本支出，所以不可靠。所有者收益 = 净利润 + 折旧摊销等非现金费用 - 维持竞争地位所需的资本支出。这才是真正可以取出来交给股东的钱。95%的美国企业，其资本支出约等于折旧额——这笔钱不是利润，是维持机器运转的成本。</p>
+    </div>
+    <div class="tenet-card finance">
+      <div class="tenet-num">原则 9</div>
+      <h3>寻找高利润率</h3>
+      <p>高成本企业倾向于不断提高成本，低成本企业不断寻找新的节约方式。好的管理者不会"今天决定削减成本"——削减成本应该是永恒的习惯，而不是危机时的应急措施。高利润率是护城河的财务体现，也是企业定价权的证明。</p>
+    </div>
+    <div class="tenet-card finance">
+      <div class="tenet-num">原则 10</div>
+      <h3>每保留一元，至少创造一元市值</h3>
+      <p>留存收益检验：企业保留的每一元利润，是否创造了至少一元的市场价值？这是检验管理层资本配置能力最直接的方式。如果留存1元只创造了0.5元市值，说明钱留在企业里不如分给股东——股东自己拿去投资会更有效率。</p>
+    </div>
+  </div>
+</div>
+
+<div class="tenet-group">
+  <div class="tenet-group-header">
+    <span class="tenet-group-badge badge-value">估值原则</span>
+    <span class="tenet-count">第11-12条 · 评估价格是否合理</span>
+  </div>
+  <div class="tenet-grid">
+    <div class="tenet-card value">
+      <div class="tenet-num">原则 11</div>
+      <h3>计算企业的内在价值</h3>
+      <p>巴菲特使用约翰·伯尔·威廉斯的股息折现模型：将企业未来生命周期内能产生的所有所有者收益，用适当的折现率折算为今天的价值。折现率使用无风险利率（长期国债收益率），当利率极低时上调至10%。这个数字是主观的、模糊的，但它是唯一合理的评估标准。</p>
+    </div>
+    <div class="tenet-card value">
+      <div class="tenet-num">原则 12</div>
+      <h3>以有吸引力的价格买入</h3>
+      <p>满足前11条只是必要条件，不是充分条件。还需要在合适的价格买入。巴菲特沿用格雷厄姆的"安全边际"（Margin of Safety）：以显著低于内在价值的价格买入。安全边际有两个作用：一是对估算错误提供缓冲，二是在价格回归内在价值时产生超额回报。</p>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     07 集中持仓
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">07</div>
+  <div class="section-title-wrap">
+    <div class="section-label">组合管理 · 第10章</div>
+    <div class="section-title">集中持仓：颠覆分散化的传统智慧</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">集中持仓（Focus Investing）</div>
+  <h3>巴菲特的75%法则：五只股票占总仓位的四分之三</h3>
+  <p>传统投资理论推崇广泛分散——持有数十甚至数百只股票，用多样化降低单一风险。巴菲特的做法恰恰相反：伯克希尔的普通股投资，通常75%以上集中在五只股票里。</p>
+  <p>这不是鲁莽，而是有逻辑支撑的：如果你真的按12条原则严格筛选，你能找到的真正优秀的企业本来就不多。广泛分散意味着你买了很多"还不错但不够好"的企业，稀释了那些真正优秀的企业的贡献。</p>
+</div>
+
+<div class="twocol">
+  <div class="col-block bad">
+    <h3>❌ 广泛分散的问题</h3>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>持有50只股票，意味着你对每只股票的了解都很浅——违反了原则1（简单易懂）</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>分散降低的是波动性，不是真正的风险——真正的风险是对企业理解不足</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>把平庸企业和优秀企业平等对待，优秀企业的超额贡献被稀释</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--red)"></div><p>让投资者放松了对每笔投资的研究深度要求</p></div>
+  </div>
+  <div class="col-block good">
+    <h3>✓ 集中持仓的逻辑</h3>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>集中迫使你只买真正理解、真正有把握的企业</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>巴菲特说：12次真正好的决策，足以造就一生的投资成就</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>当你深度了解一家企业，短期价格下跌是机会而不是恐惧</p></div>
+    <div class="li"><div class="li-dot" style="background:var(--green)"></div><p>持有期越长、换手率越低，交易成本和税收对复利的侵蚀越小</p></div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">换手率与持有期</div>
+  <h3>"如果不愿持有十年，就不要持有十分钟"</h3>
+  <p>集中持仓的配套原则是极低的换手率。巴菲特理想的持有期是"永远"——不是因为懒得卖，而是因为他相信真正优秀的企业随着时间推移会持续创造价值，卖出只是把未来的收益提前兑现。</p>
+  <p>1996年信里那句话的完整逻辑：如果你买股票的逻辑依赖于几分钟、几天或几个月内的价格变化，那你根本不是在"买企业"，你是在投机。买企业的决策应该基于对企业未来五年、十年、二十年盈利能力的判断——这种判断需要深度理解，而深度理解需要时间和精力，不可能同时对50只股票做到。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     08 投资心理学
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">08</div>
+  <div class="section-title-wrap">
+    <div class="section-label">心理学 · 第11章</div>
+    <div class="section-title">投资心理学：最难的不是选股，是坚守</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">Hagstrom的核心警告</div>
+  <h3>大多数学巴菲特的人，在这一章就失败了</h3>
+  <p>Hagstrom 在第11章的开头就警告：很多人学会了前面十章的选股方法，但最终的投资结果依然糟糕。原因不是方法错了，而是在执行过程中被心理因素击败了。</p>
+  <p>他认为，<strong>投资中最难克服的敌人不是市场，而是投资者自己</strong>——情绪、认知偏差、群体压力会系统性地干扰合理决策。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">四种心理陷阱</div>
+  <h3>行为金融学对价值投资的具体挑战</h3>
+  <p><strong>过度自信</strong>——人们系统性地高估自己的预测能力和知识水平。表现为交易过于频繁，认为自己能判断短期市场走势。</p>
+  <p><strong>近因偏差</strong>——过度重视最近发生的事件，以为近期趋势会无限延续。市场大涨时觉得会继续涨，大跌时觉得会继续跌——恰好和正确决策相反。</p>
+  <p><strong>损失厌恶</strong>——心理学研究显示，损失100元的痛苦大约是获得100元快乐的两倍。这导致人们倾向于过早锁定利润、过长持有亏损——和应该做的恰好相反。</p>
+  <p><strong>从众效应</strong>——当所有人都在买的时候很难不买，当所有人都在卖的时候很难不卖。这解释了为什么市场在极度高估时依然有人追涨，在极度低估时依然有人割肉。</p>
+</div>
+
+<div class="block">
+  <div class="block-label">巴菲特的解决方案</div>
+  <h3>不是更理性，而是不受市场情绪影响</h3>
+  <p>巴菲特自己说，他让格雷厄姆的"市场先生"概念在脑子里扎了根，这是他应对市场情绪最有效的工具——每次看到价格大跌，他想到的不是恐惧，而是市场先生今天心情很差，报价很低，这是机会。</p>
+  <p>Hagstrom 补充：集中持仓本身也是心理武器。当你只持有五只你深入研究过的企业，你对它们的理解远超市场平均，你有底气在市场恐慌时不随大流。持有50只你一知半解的股票，在市场下跌时很容易被情绪击垮。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     09 可口可乐案例
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">09</div>
+  <div class="section-title-wrap">
+    <div class="section-label">案例研究 · 第4章</div>
+    <div class="section-title">可口可乐：12条原则的实战应用</div>
+    <div class="section-note">1988年，巴菲特用10亿美元买入可口可乐——这是他最重要的一笔投资</div>
+  </div>
+</div>
+
+<div class="block">
+  <p>Hagstrom 在第4章用可口可乐作为最完整的案例，演示了12条原则如何在一次真实投资决策中逐一应用。这笔投资在当时颇有争议——可口可乐的股价在1988年已经上涨了五倍，看起来并不便宜。巴菲特为什么还要买？</p>
+</div>
+
+<table class="compare">
+  <tr><th>原则</th><th>可口可乐的情况</th></tr>
+  <tr><td>简单易懂</td><td>全球最知名的消费品之一，商业模式极简——卖糖水，然后卖更多糖水。巴菲特说他在1936年就喝了第一瓶可口可乐，这家企业他完全理解</td></tr>
+  <tr><td>稳定经营历史</td><td>百年历史，核心产品从未改变，1886年开始的配方至今基本一致，经营模式高度稳定</td></tr>
+  <tr><td>良好长期前景</td><td>全球市场仍有巨大空间——尤其是中国、印度、东南亚等发展中市场尚未饱和。品牌护城河无可撼动</td></tr>
+  <tr><td>管理层理性</td><td>Roberto Goizueta接手后大幅提升资本配置效率，剥离非核心业务，专注可乐，ROE从1980年的20%提升到1988年的31%</td></tr>
+  <tr><td>管理层坦诚</td><td>1985年推出"新可乐"失败后，Goizueta立即承认错误并恢复经典配方——这是管理层坦诚的典型表现</td></tr>
+  <tr><td>抵制机构惰性</td><td>当整个饮料行业在多元化时，可口可乐坚持专注，剥离其他业务。这需要抵制巨大的机构惰性</td></tr>
+  <tr><td>股本回报率</td><td>1988年ROE高达31%，远高于行业平均，且无需高杠杆实现</td></tr>
+  <tr><td>所有者收益</td><td>资本支出极低（饮料浓缩液生产不需要大量固定资产），所有者收益接近会计利润，是真正的现金奶牛</td></tr>
+  <tr><td>利润率</td><td>装瓶商承担大部分资本支出，可口可乐只负责浓缩液，利润率结构性地高</td></tr>
+  <tr><td>留存收益检验</td><td>每保留一元，历史上产生了远超一元的市值增长</td></tr>
+  <tr><td>内在价值</td><td>巴菲特估算未来现金流，认为以合理折现率计算，当时股价仍显著低于内在价值</td></tr>
+  <tr><td>安全边际</td><td>当时市盈率约15倍，相对于可口可乐的品质和成长潜力，有足够的安全边际</td></tr>
+</table>
+
+<div class="block">
+  <p>结果：巴菲特投入约10亿美元，到1998年该仓位价值约133亿美元，十年13倍。这笔投资至今仍是伯克希尔持仓，已成为历史上最成功的单笔投资之一。</p>
+  <p>Hagstrom 的总结：可口可乐符合所有12条原则，这不是偶然。真正伟大的企业在所有维度上都经得起检验。</p>
+</div>
+
+<!-- ══════════════════════════════════════
+     10 总结
+═══════════════════════════════════════ -->
+<div class="section-header">
+  <div class="section-num">10</div>
+  <div class="section-title-wrap">
+    <div class="section-label">总结</div>
+    <div class="section-title">Hagstrom最后的警告</div>
+  </div>
+</div>
+
+<div class="block">
+  <div class="block-label">最大的挑战不是选股</div>
+  <h3>"真正的考验是在不确定和压力下坚守"</h3>
+  <p>Hagstrom 在最后一章写道：学会这12条原则的最大挑战，不是在牛市里找到好企业——那相对容易。真正的考验是在市场极度恐慌时、在你持有的股票大跌30%时、在周围所有人都在卖出时，你能不能凭借对企业的深度理解保持冷静，甚至加仓。</p>
+  <p>他引用了巴菲特的话：<strong>"真正优秀的投资者是那些不被市场情绪所左右的人。"</strong> 这种能力不是天生的，而是通过理解企业、理解价值投资的逻辑，以及不断实践而慢慢培养的。</p>
+</div>
+
+<div class="sum-grid">
+  <div class="sg">
+    <div class="sg-n">1</div>
+    <div class="sg-t"><h3>格雷厄姆 + 费雪 + 芒格 = 完整体系</h3><p>量化（安全边际）+ 定性（管理层、护城河）+ 哲学（为好企业付合理价格）缺一不可</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">2</div>
+    <div class="sg-t"><h3>12条是筛选漏斗，不是清单</h3><p>从上到下逐步淘汰，通过所有12条的企业极少，但那才是值得买入的</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">3</div>
+    <div class="sg-t"><h3>集中持仓是结果，不是策略</h3><p>严格按12条筛选，自然找不到太多企业，集中是必然的，而不是刻意为之</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">4</div>
+    <div class="sg-t"><h3>最大的敌人是自己的情绪</h3><p>方法不难，难的是在恐慌时执行方法。理解企业越深，情绪干扰越小</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">5</div>
+    <div class="sg-t"><h3>ROE > EPS，所有者收益 > 现金流</h3><p>用对了衡量标准，才能看清企业的真实质量和管理层的真实能力</p></div>
+  </div>
+  <div class="sg">
+    <div class="sg-n">6</div>
+    <div class="sg-t"><h3>12次好决策足够了</h3><p>巴菲特说四十年职业生涯里，真正改变命运的决策只有约12次——一个普通投资者也不需要更多</p></div>
+  </div>
+</div>
+
+<div class="formula">
+  <p>
+    在你完全理解的企业里，<br>
+    找到<em>护城河宽、管理层优、财务健康</em>的，<br>
+    以有安全边际的价格买入，<br>
+    然后<em>耐心持有</em>。
+  </p>
+</div>
+
+<div class="tags">
+  <span class="tag hl">能力圈</span>
+  <span class="tag">稳定经营历史</span>
+  <span class="tag hl">护城河</span>
+  <span class="tag">管理层理性</span>
+  <span class="tag hl">股本回报率 ROE</span>
+  <span class="tag">所有者收益</span>
+  <span class="tag hl">安全边际</span>
+  <span class="tag">内在价值（模糊的）</span>
+  <span class="tag hl">集中持仓</span>
+  <span class="tag">低换手率</span>
+  <span class="tag hl">机构惰性</span>
+  <span class="tag">留存收益检验</span>
+  <span class="tag hl">坚守比选股更难</span>
+  <span class="tag">可口可乐案例</span>
+</div>
+
+<hr>
+
+<div style="background:var(--bg2); border-radius:4px; padding:24px 28px; margin-top:20px;">
+  <p style="font-size:0.85rem; color:var(--ink3); margin-bottom:8px;">与其他书的关系</p>
+  <p style="font-size:0.88rem; color:var(--ink2); line-height:2.1;">
+    <strong>《穷查理宝典》</strong>是芒格版本——多元思维模型、反向思考、否定法。和巴菲特之道的重合度高，但角度不同。<br>
+    <strong>《聪明的投资者》（格雷厄姆）</strong>是巴菲特之道的理论源头，尤其是安全边际和市场先生。<br>
+    <strong>《怎样选择成长股》（费雪）</strong>是管理层评估和长期持有逻辑的原始来源。<br>
+    读了巴菲特之道，上面三本书的核心你已经通过这个框架间接吸收了，不必再逐一读完。
+  </p>
+</div>
+
+<footer>
+  Designed by 葱头爸爸 · liamphoenixwayne@outlook.com
+</footer>
+
+</div>
+</body>
+</html>
